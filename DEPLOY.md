@@ -61,3 +61,29 @@ npm run dev -- --host 0.0.0.0 --port 4173
 - token 是否有 repo 写权限
 - 凭据是否写入服务器
 - 仓库地址是否正确
+
+
+---
+
+## 常驻运行（systemd）
+
+如果你希望服务后台常驻、并支持开机自启：
+
+```bash
+cd /root/.openclaw/workspace/apps/agent-dashboard
+./install-service.sh
+```
+
+安装后可用以下命令检查：
+
+```bash
+sudo systemctl status agent-dashboard-api.service
+sudo systemctl status agent-dashboard-web.service
+```
+
+重启服务：
+
+```bash
+sudo systemctl restart agent-dashboard-api.service
+sudo systemctl restart agent-dashboard-web.service
+```
