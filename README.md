@@ -121,6 +121,26 @@ agent-dashboard/
 
 ---
 
+## 一键启动
+
+在项目目录执行：
+
+```bash
+./start.sh
+```
+
+停止服务：
+
+```bash
+./stop.sh
+```
+
+启动后默认可访问：
+- 页面：`http://<server-ip>:4173/`
+- API：`http://<server-ip>:4173/api/health`
+
+---
+
 ## 快速开始
 
 ### 1. 安装依赖
