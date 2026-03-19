@@ -15,4 +15,9 @@ for file in .api.pid .web.pid; do
   fi
 done
 
+pkill -f "node server.js" >/dev/null 2>&1 || true
+pkill -f "vite --host 0.0.0.0 --port 4173" >/dev/null 2>&1 || true
+pkill -f "npm run dev:api" >/dev/null 2>&1 || true
+pkill -f "npm run dev -- --host 0.0.0.0 --port 4173" >/dev/null 2>&1 || true
+
 echo "done"

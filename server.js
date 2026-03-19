@@ -6,11 +6,11 @@ const exec = promisify(execCb)
 const PORT = process.env.PORT || 3456
 const ROOT = process.cwd()
 const REFRESH_MS = 15000
-const STATUS_TIMEOUT_MS = 3500
+const STATUS_TIMEOUT_MS = 20000
 const MIN_REFRESH_GAP_MS = 5000
 
 async function runCommand(cmd, options = {}) {
-  const timeout = options.timeout ?? 12000
+  const timeout = options.timeout ?? STATUS_TIMEOUT_MS
   try {
     const { stdout, stderr } = await exec(cmd, {
       cwd: ROOT,

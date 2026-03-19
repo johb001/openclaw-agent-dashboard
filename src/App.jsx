@@ -1,35 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
 const API_BASE = ''
-
-/* ── helpers ─────────────────────────────────────────────── */
-function StatCard({ title, value, hint }) {
-  return (
-    <div className="card stat-card">
-      <div className="stat-title">{title}</div>
-      <div className="stat-value">{value}</div>
-      {hint ? <div className="stat-hint">{hint}</div> : null}
-    </div>
-  )
-}
-
-function SectionCard({ title, children, extra }) {
-  return (
-    <div className="card section-card">
-      <div className="section-head">
-        <h2>{title}</h2>
-        {extra}
-      </div>
-      <div>{children}</div>
-    </div>
-  )
-}
-
-function formatJson(value) {
-  if (value == null) return '暂无数据'
-  return JSON.stringify(value, null, 2)
-}
 
 function number(value) {
   return new Intl.NumberFormat('zh-CN').format(value || 0)
@@ -45,9 +17,19 @@ function ageText(ms) {
   return `${Math.floor(hour / 24)} 天前`
 }
 
-function agentRole(agentId) {
-  const map = { main: '主控', builder: '构建', planner: '规划', qa: '质检' }
-  return map[agentId] || 'Agent'
+function formatJson(value) {
+  if (!value) return '暂无数据'
+  return JSON.stringify(value, null, 2)
+}
+
+function agentMeta(agentId) {
+  const metas = {
+    main: { avatar: '🐉', name: '龙龙', role: '主控智能体', color: '#7c3aed' },
+    builder: { avatar: '🔧', name: '构建者', role: '代码构建', color: '#0891b2' },
+    planner: { avatar: '📋', name: '规划师', role: '任务规划', color: '#059669' },
+    qa: { avatar: '🔍', name: '质检员', role: '质量检查', color: '#dc2626' },
+  }
+  return metas[agentId] || { avatar: '🤖', name: agentId, role: 'Agent', color: '#6b7280' }
 }
 
 function sessionState(item) {
@@ -58,93 +40,85 @@ function sessionState(item) {
   return 'idle'
 }
 
-/* ── 状态徽章组件 ─────────────────────────────────────────── */
-function StatusBadge({ status }) {
-  if (status === 'loading') {
-    return <span className="badge badge-loading">◌ 正在加载…</span>
-  }
-  if (status === 'refreshing') {
-    return <span className="badge badge-refreshing">↻ 正在刷新缓存</span>
-  }
-  if (status === 'stale') {
-    return <span className="badge badge-stale">⏱ 显示上次缓存</span>
-  }
-  if (status === 'error') {
-    return <span className="badge badge-error">⚠ 数据异常</span>
-  }
-  return null
+function statusDotClass(state) {
+  if (state === 'active') return 'on'
+  if (state === 'warm') return 'warm'
+  return 'off'
 }
 
-/* ── 空状态组件 ───────────────────────────────────────────── */
-function EmptyState({ message, sub }) {
+function getStatus(lastActiveAgeMs, bootstrapPending) {
+  if (bootstrapPending) return ['启动中', 'pending']
+  if (!lastActiveAgeMs) return ['离线', 'off']
+  if (lastActiveAgeMs < 5 * 60 * 1000) return ['活跃', 'active']
+  if (lastActiveAgeMs < 60 * 60 * 1000) return ['温热', 'warm']
+  return ['空闲', 'idle']
+}
+
+function EmptyState({ title, hint }) {
   return (
-    <div className="empty-state">
-      <div className="empty-icon">📭</div>
-      <div className="empty-msg">{message}</div>
-      {sub && <div className="empty-sub">{sub}</div>}
+    <div className="app-empty">
+      <strong>{title}</strong>
+      {hint ? <div className="app-empty-sub">{hint}</div> : null}
     </div>
   )
 }
 
-/* ── 加载骨架行 ───────────────────────────────────────────── */
-function SkeletonRow({ cols = 5 }) {
+function BarList({ title, items, formatter = (v) => number(v) }) {
+  const max = Math.max(...items.map((i) => i.value || 0), 1)
   return (
-    <tr>
-      {Array.from({ length: cols }, (_, i) => (
-        <td key={i}>
-          <span className="skeleton-line" style={{ width: `${60 + Math.random() * 40}%` }} />
-        </td>
-      ))}
-    </tr>
+    <div className="app-feature-card">
+      <div className="app-feature-head"><h3>{title}</h3><span className="af-cnt">{items.length}</span></div>
+      <div className="app-feature-body">
+        {items.length ? (
+          <div className="bar-list">
+            {items.map((item) => (
+              <div className="bar-row" key={item.label}>
+                <div className="bar-row-top">
+                  <span>{item.label}</span>
+                  <strong>{formatter(item.value)}</strong>
+                </div>
+                <div className="bar-track">
+                  <div className="bar-fill" style={{ width: `${Math.max((item.value / max) * 100, 6)}%` }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <EmptyState title="暂无数据" hint="后续会自动生成" />
+        )}
+      </div>
+    </div>
   )
 }
 
-/* ── 主应用 ───────────────────────────────────────────────── */
-function App() {
+export default function App() {
   const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [refreshing, setRefreshing] = useState(false)   // 正在后台刷新
+  const [refreshing, setRefreshing] = useState(false)
   const [error, setError] = useState('')
   const [lastUpdated, setLastUpdated] = useState('')
-  const [selectedAgent, setSelectedAgent] = useState('main')
   const [agentDetail, setAgentDetail] = useState(null)
-  const [agentDetailLoading, setAgentDetailLoading] = useState(false)
+  const [activeTab, setActiveTab] = useState('monitor')
+  const [selectedAgent, setSelectedAgent] = useState('main')
   const [selectedSession, setSelectedSession] = useState(null)
+  const [memoryView, setMemoryView] = useState('logs')
 
-  const firstLoadDone = useRef(false)
-
-  async function load(isBackgroundRefresh = false) {
-    if (isBackgroundRefresh) {
-      setRefreshing(true)
-    } else {
-      setError('')
-    }
-
+  async function load(silent = false) {
     try {
+      if (silent) setRefreshing(true)
+      setError('')
       const res = await fetch(`${API_BASE}/api/overview`)
       const json = await res.json()
       if (!res.ok || !json.ok) throw new Error(json.error || '加载失败')
-
       setData(json)
-      setLastUpdated(new Date().toLocaleString('zh-CN'))
-      setError('')
-      firstLoadDone.current = true
+      setLastUpdated(new Date().toLocaleString())
     } catch (err) {
-      if (isBackgroundRefresh && firstLoadDone.current) {
-        // 后台刷新失败：保留旧数据，显示 stale 提示
-        setError('刷新失败，已显示上次缓存数据')
-      } else {
-        setError(err.message || '请求失败')
-      }
+      setError(err.message || '请求失败')
     } finally {
-      setLoading(false)
       setRefreshing(false)
     }
   }
 
   async function loadAgentDetail(agentId) {
-    setAgentDetailLoading(true)
-    setAgentDetail(null)
     try {
       const res = await fetch(`${API_BASE}/api/agent/${encodeURIComponent(agentId)}`)
       const json = await res.json()
@@ -152,374 +126,216 @@ function App() {
       setAgentDetail(json)
     } catch (err) {
       setAgentDetail({ ok: false, error: err.message || '加载失败' })
-    } finally {
-      setAgentDetailLoading(false)
     }
   }
 
-  /* 首次加载 + 每 5 秒后台刷新 */
   useEffect(() => {
     load(false)
-    const timer = setInterval(() => load(true), 5000)
+    const timer = setInterval(() => load(true), 15000)
     return () => clearInterval(timer)
   }, [])
 
-  /* 切换 agent 时加载详情 */
   useEffect(() => {
     if (selectedAgent) loadAgentDetail(selectedAgent)
-  }, [selectedAgent])
+  }, [selectedAgent, data])
 
-  /* 手动刷新 */
-  function handleRefresh() {
-    setRefreshing(true)
-    load(false)
-  }
+  const summary = data?.summary || {}
+  const usage = data?.usage || {}
+  const agents = data?.agents || []
+  const recentSessions = data?.recentSessions || []
+  const cacheState = data?.cacheState || {}
 
-  /* 派生状态 */
-  const agents = useMemo(() => data?.agents || [], [data])
-  const recentSessions = useMemo(() => data?.recentSessions || [], [data])
-  const usage = data?.usage
-  const summary = data?.summary
+  const agentCards = useMemo(() => {
+    return agents.map((agent) => {
+      const sessions = recentSessions.filter((item) => item.agentId === agent.id)
+      const totalTokens = sessions.reduce((sum, item) => sum + (item.totalTokens || 0), 0)
+      const activeCount = sessions.filter((item) => sessionState(item) === 'active').length
+      return {
+        ...agent,
+        totalTokens,
+        activeCount,
+        model: sessions[0]?.model || '-',
+      }
+    })
+  }, [agents, recentSessions])
 
-  /* 计算当前页面状态 */
-  const pageStatus = loading
-    ? 'loading'
-    : error && !data
-    ? 'error'
-    : error && data
-    ? 'stale'
-    : null
+  const selectedAgentCard = useMemo(() => agentCards.find((a) => a.id === selectedAgent) || null, [agentCards, selectedAgent])
+  const onlineAgents = useMemo(() => agentCards.filter((a) => !a.bootstrapPending && (a.lastActiveAgeMs || Infinity) < 60 * 60 * 1000).length, [agentCards])
+  const currentSession = useMemo(() => recentSessions.find((s) => s.agentId === selectedAgent) || null, [recentSessions, selectedAgent])
+  const modelBars = useMemo(() => Object.entries(usage?.byModel || {}).map(([label, value]) => ({ label, value })).sort((a, b) => b.value - a.value), [usage])
+  const agentBars = useMemo(() => Object.entries(usage?.byAgent || {}).map(([label, value]) => ({ label, value })).sort((a, b) => b.value - a.value), [usage])
+  const recentFeed = useMemo(() => recentSessions.slice(0, 8), [recentSessions])
+  const logEntries = useMemo(() => recentSessions.slice(0, 20), [recentSessions])
 
-  const lanes = useMemo(() => {
-    const bucket = { active: [], warm: [], idle: [], aborted: [] }
-    for (const item of recentSessions) {
-      bucket[sessionState(item)]?.push(item)
-    }
-    return bucket
-  }, [recentSessions])
+  const navItems = [
+    ['monitor', '📡', '实时监控'],
+    ['memory', '🧠', '记忆中心'],
+    ['sessions', '💬', '会话管理'],
+    ['stats', '📈', '数据统计'],
+  ]
+
+  const selectedMeta = selectedAgentCard ? agentMeta(selectedAgentCard.id) : { avatar: '🤖', name: '未选择', role: 'Agent' }
+  const [selectedStatusLabel, selectedStatusClass] = selectedAgentCard ? getStatus(selectedAgentCard.lastActiveAgeMs, selectedAgentCard.bootstrapPending) : ['未选择', 'off']
 
   return (
-    <div className="app-shell">
-      {/* ── 顶栏 ── */}
-      <header className="topbar">
-        <div>
-          <p className="eyebrow">OpenClaw Dashboard</p>
-          <h1>智能体工作台</h1>
-          <p className="subtitle">实时查看状态、使用情况、配置和多智能体活动</p>
+    <div className="dashboard-shell">
+      <header className="header-refined">
+        <div className="header-main">
+          <div className="header-brand-row">
+            <div className="header-brand-mark">🦞</div>
+            <div className="header-brand-copy">
+              <div className="header-kicker">AI Team Console</div>
+              <h1>AI Team 调度中心</h1>
+              <p>更清晰地查看当前 Agent、模型状态与团队在线情况</p>
+            </div>
+          </div>
+          <div className="header-tabs-refined">
+            {navItems.map(([tab, icon, label]) => (
+              <button key={tab} className={`tab-btn${activeTab === tab ? ' active' : ''}`} onClick={() => setActiveTab(tab)}>
+                <span className="tab-icon">{icon}</span>
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="topbar-actions">
-          <StatusBadge status={pageStatus} />
-          <div className="topbar-row">
-            <button onClick={handleRefresh} disabled={refreshing}>
-              {refreshing ? '刷新中…' : '立即刷新'}
-            </button>
-            <span className="muted">
-              {lastUpdated
-                ? `更新于 ${lastUpdated}`
-                : loading
-                ? '等待首次加载'
-                : '暂无数据'}
-            </span>
+
+        <div className="header-side">
+          <div className="header-summary-grid">
+            <div className="topbar-info-card">
+              <div className="topbar-card-label">团队状态</div>
+              <div className="topbar-pill-row">
+                <span className="topbar-pill topbar-pill-success">在线 {onlineAgents}/{agents.length || 0}</span>
+                <span className={`topbar-pill ${error ? 'topbar-pill-danger' : 'topbar-pill-info'}`}>{error ? '连接异常' : cacheState?.degraded ? '缓存模式' : '同步正常'}</span>
+              </div>
+              <div className="topbar-inline-meta">
+                <span className={`live-dot${error ? ' is-off' : ''}`}></span>
+                <span>{lastUpdated ? `更新于 ${lastUpdated}` : '等待加载'}</span>
+              </div>
+            </div>
+
+            <div className="topbar-info-card">
+              <div className="topbar-card-label">当前焦点</div>
+              <div className="topbar-focus-row">
+                <div className="topbar-focus-agent" style={{ '--agent-accent': selectedMeta.color }}>
+                  <span className="focus-avatar">{selectedMeta.avatar}</span>
+                  <div className="focus-copy">
+                    <strong>{selectedMeta.name}</strong>
+                    <span>{selectedMeta.role}</span>
+                  </div>
+                </div>
+                <span className={`topbar-status-pill status-${selectedStatusClass}`}>{selectedStatusLabel}</span>
+              </div>
+              <div className="topbar-metric-row">
+                <div className="topbar-mini-metric"><span>模型</span><strong>{currentSession?.model || selectedAgentCard?.model || '-'}</strong></div>
+                <div className="topbar-mini-metric"><span>会话</span><strong>{selectedAgentCard?.sessionsCount || 0}</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="header-strip">
+            <div className="header-strip-item"><span className="strip-label">当前 Agent</span><span className="strip-badge strip-badge-agent">{selectedMeta.avatar} {selectedMeta.name}</span></div>
+            <div className="header-strip-item"><span className="strip-label">运行模型</span><span className="strip-badge strip-badge-model">{currentSession?.model || selectedAgentCard?.model || '-'}</span></div>
+            <div className="header-strip-item"><span className="strip-label">在线数</span><span className="strip-badge strip-badge-online">{onlineAgents}/{agents.length || 0}</span></div>
+            <div className="header-strip-item"><span className="strip-label">当前状态</span><span className={`strip-badge status-${selectedStatusClass}`}>{selectedStatusLabel}</span></div>
+          </div>
+
+          <div className="topbar-actions-card">
+            <button className="topbar-refresh-btn" onClick={() => load(false)} disabled={refreshing}>{refreshing ? '刷新中…' : '↻ 刷新'}</button>
           </div>
         </div>
       </header>
 
-      {/* ── 全局提示 ── */}
-      {error && pageStatus === 'error' ? (
-        <div className="banner error">
-          <strong>⚠ 服务异常：</strong>{error}
-          &nbsp;&nbsp;<span className="muted">请检查 Gateway 是否在线</span>
-        </div>
-      ) : null}
-      {error && pageStatus === 'stale' ? (
-        <div className="banner warn">
-          <strong>⏱ {error}</strong>
-          &nbsp;&nbsp;<span className="muted">数据可能不是最新的，请稍后重试</span>
-        </div>
-      ) : null}
+      {error ? <div className="banner danger">数据请求失败：{error}</div> : null}
+      {cacheState?.degraded && !error ? <div className="banner warn">当前处于降级/缓存模式</div> : null}
 
-      {/* ── 统计卡片 ── */}
-      <section className="stats-grid">
-        <StatCard
-          title="智能体总数"
-          value={summary?.totalAgents ?? (data ? 0 : '-')}
-          hint={data ? `默认 agent：${summary?.defaultAgent || '-'}` : ''}
-        />
-        <StatCard
-          title="总会话数"
-          value={summary?.totalSessions ?? (data ? 0 : '-')}
-          hint={data ? `默认模型：${summary?.defaultModel || '-'}` : ''}
-        />
-        <StatCard
-          title="最近样本 Token"
-          value={data ? number(usage?.totals?.totalTokens) : '-'}
-          hint={data ? `最近 ${usage?.recentCount || 0} 条 session 样本` : ''}
-        />
-        <StatCard
-          title="Gateway"
-          value={data ? (summary?.gatewayReachable ? '在线' : '离线') : '-'}
-          hint={summary?.host || (data ? '无法获取' : '')}
-        />
-      </section>
-
-      {/* ── 团队卡片 ── */}
-      <section className="team-grid">
-        {loading ? (
-          Array.from({ length: 4 }, (_, i) => (
-            <div key={i} className="card team-card skeleton-card">
-              <div className="skeleton-line" style={{ width: '60%', height: 20 }} />
-              <div className="skeleton-line" style={{ width: '40%', height: 14, marginTop: 8 }} />
-              <div className="skeleton-line" style={{ width: '80%', height: 14, marginTop: 16 }} />
-            </div>
-          ))
-        ) : agents.length === 0 ? (
-          <div className="team-grid-empty">
-            <EmptyState
-              message="暂无 agent 数据"
-              sub="服务在线，但未检测到任何 Agent，请确认 OpenClaw 是否已启动"
-            />
+      <div className="app-container">
+        <aside className="app-sidebar">
+          <div className="app-sidebar-section">
+            <div className="app-sidebar-label">当前智能体</div>
+            {agentCards.length ? agentCards.map((agent) => {
+              const meta = agentMeta(agent.id)
+              const [, statusClass] = getStatus(agent.lastActiveAgeMs, agent.bootstrapPending)
+              return (
+                <button key={agent.id} className={`app-sidebar-item${selectedAgent === agent.id ? ' active' : ''}`} onClick={() => setSelectedAgent(agent.id)}>
+                  <span className="si-icon">{meta.avatar}</span>
+                  <span className="si-name">{meta.name}</span>
+                  <span className={`si-dot ${statusDotClass(statusClass)}`}></span>
+                </button>
+              )
+            }) : <div className="app-sidebar-empty">暂无 agent</div>}
           </div>
-        ) : (
-          agents.map((agent) => {
-            const agentSessions = recentSessions.filter((item) => item.agentId === agent.id)
-            const tokenSum = agentSessions.reduce((sum, item) => sum + (item.totalTokens || 0), 0)
-            const activeCount = agentSessions.filter((item) => sessionState(item) === 'active').length
-            return (
-              <button
-                key={agent.id}
-                className={`card team-card ${selectedAgent === agent.id ? 'team-card-active' : ''}`}
-                onClick={() => setSelectedAgent(agent.id)}
-              >
-                <div className="team-top">
-                  <div>
-                    <div className="team-name">{agent.name}</div>
-                    <div className="team-role">{agentRole(agent.id)}</div>
-                  </div>
-                  <span className={`dot ${agent.bootstrapPending ? 'dot-warn' : 'dot-ok'}`} />
-                </div>
-                <div className="team-stats">
-                  <div>
-                    <strong>{agent.sessionsCount}</strong>
-                    <span>会话</span>
-                  </div>
-                  <div>
-                    <strong>{number(tokenSum)}</strong>
-                    <span>tokens</span>
-                  </div>
-                  <div>
-                    <strong>{activeCount}</strong>
-                    <span>活跃</span>
-                  </div>
-                </div>
-                <div className="team-meta">最近活跃：{ageText(agent.lastActiveAgeMs)}</div>
+          <div className="app-sidebar-divider"></div>
+          <div className="app-sidebar-section">
+            <div className="app-sidebar-label">快捷导航</div>
+            {navItems.map(([tab, icon, label]) => (
+              <button key={tab} className={`app-sidebar-item${activeTab === tab ? ' active' : ''}`} onClick={() => setActiveTab(tab)}>
+                <span className="si-icon">{icon}</span>
+                <span className="si-name">{label}</span>
               </button>
-            )
-          })
-        )}
-      </section>
+            ))}
+          </div>
+        </aside>
 
-      {/* ── 主网格 ── */}
-      <section className="main-grid">
-        {/* 泳道视图 */}
-        <SectionCard title="团队泳道视图">
-          {loading ? (
-            <div className="lanes-grid">
-              {[['active', '活跃中'], ['warm', '近期活跃'], ['idle', '空闲'], ['aborted', '异常']].map(([key, label]) => (
-                <div className="lane" key={key}>
-                  <div className="lane-head">{label} · -</div>
-                  {[1, 2].map(i => <div key={i} className="lane-item skeleton-lane-item" />)}
-                </div>
-              ))}
-            </div>
-          ) : recentSessions.length === 0 ? (
-            <EmptyState message="暂无会话数据" sub="泳道将在 Agent 产生会话后自动填充" />
-          ) : (
-            <div className="lanes-grid">
-              {[
-                ['active', '活跃中'],
-                ['warm', '近期活跃'],
-                ['idle', '空闲'],
-                ['aborted', '异常'],
-              ].map(([key, label]) => (
-                <div className="lane" key={key}>
-                  <div className="lane-head">{label} · {lanes[key]?.length || 0}</div>
-                  <div className="lane-body">
-                    {(lanes[key] || []).map((item, idx) => (
-                      <button
-                        key={item.sessionId || idx}
-                        className="lane-item"
-                        onClick={() => setSelectedSession(item)}
-                      >
-                        <div className="lane-item-title">{item.agentId} · {item.model || '-'}</div>
-                        <div className="lane-item-sub">{item.key || '-'}</div>
-                        <div className="lane-item-meta">{number(item.totalTokens)} tokens · {ageText(item.age)}</div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </SectionCard>
-
-        {/* 配置总览 */}
-        <SectionCard title="配置总览">
-          {loading ? (
-            <div className="skeleton-pre" />
-          ) : summary ? (
-            <pre>{formatJson(summary)}</pre>
-          ) : (
-            <EmptyState message="暂无配置数据" sub="Gateway 在线时配置将自动显示" />
-          )}
-        </SectionCard>
-
-        {/* 使用情况统计 */}
-        <SectionCard title="使用情况统计">
-          {loading ? (
+        <main className="app-content">
+          {activeTab === 'monitor' && (
             <>
-              <div className="usage-grid">
-                {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="mini-card skeleton-mini-card" />
-                ))}
+              <div className="app-section-header"><div><h2 className="app-section-title">实时监控</h2><p className="app-section-sub">当前 Agent / Session / 最近动态一眼看清</p></div></div>
+              <div className="app-status-grid">
+                <div className="app-status-card ok"><div className="as-label">ONLINE</div><div className="as-value">{onlineAgents}</div><div className="as-sub">在线智能体</div></div>
+                <div className="app-status-card info"><div className="as-label">CURRENT</div><div className="as-value">{selectedMeta.name}</div><div className="as-sub">当前 Agent</div></div>
+                <div className="app-status-card warn"><div className="as-label">SESSION</div><div className="as-value">{selectedAgentCard?.sessionsCount || 0}</div><div className="as-sub">当前会话数</div></div>
+                <div className="app-status-card info"><div className="as-label">TOTAL</div><div className="as-value">{summary.totalSessions || 0}</div><div className="as-sub">总会话数</div></div>
               </div>
-              <div className="skeleton-pre" />
-            </>
-          ) : usage ? (
-            <>
-              <div className="usage-grid">
-                <div className="mini-card">
-                  <div className="mini-title">输入 Tokens</div>
-                  <div className="mini-value">{number(usage?.totals?.inputTokens)}</div>
-                </div>
-                <div className="mini-card">
-                  <div className="mini-title">输出 Tokens</div>
-                  <div className="mini-value">{number(usage?.totals?.outputTokens)}</div>
-                </div>
-                <div className="mini-card">
-                  <div className="mini-title">Cache Read</div>
-                  <div className="mini-value">{number(usage?.totals?.cacheRead)}</div>
-                </div>
-                <div className="mini-card">
-                  <div className="mini-title">Cache Write</div>
-                  <div className="mini-value">{number(usage?.totals?.cacheWrite)}</div>
-                </div>
-              </div>
-              <div className="split-2">
-                <div>
-                  <h3>按模型</h3>
-                  <pre>{formatJson(usage?.byModel)}</pre>
-                </div>
-                <div>
-                  <h3>按 Agent</h3>
-                  <pre>{formatJson(usage?.byAgent)}</pre>
-                </div>
+              <div className="app-feature-grid">
+                <div className="app-feature-card"><div className="app-feature-head"><h3>🤖 Agent Fleet</h3><span className="af-cnt">{agentCards.length}</span></div><div className="app-feature-body">{agentCards.length ? agentCards.map((agent) => { const meta=agentMeta(agent.id); const [label, cls]=getStatus(agent.lastActiveAgeMs, agent.bootstrapPending); return <div key={agent.id} className={`fleet-card${selectedAgent===agent.id?' selected':''}`} onClick={() => setSelectedAgent(agent.id)}><div className="fleet-top"><span className="fleet-avatar">{meta.avatar}</span><div><strong>{meta.name}</strong><div className="fleet-sub">{meta.role}</div></div><span className={`fleet-status status-${cls}`}>{label}</span></div><div className="fleet-metrics"><span>{agent.sessionsCount || 0} 会话</span><span>{agent.activeCount || 0} 活跃</span><span>{number(agent.totalTokens)} tokens</span></div></div>}) : <EmptyState title="暂无数据" />}</div></div>
+                <div className="app-feature-card"><div className="app-feature-head"><h3>📋 最近动态</h3><span className="af-cnt">{recentFeed.length}</span></div><div className="app-feature-body">{recentFeed.length ? recentFeed.map((item, idx) => <button key={item.sessionId || idx} className="feed-row" onClick={() => setSelectedSession(item)}><div className="feed-row-top"><span>{item.agentId}</span><span>{ageText(item.age)}</span></div><div className="feed-row-main">{item.model || '-'}</div><div className="feed-row-sub">{number(item.totalTokens || 0)} tokens</div></button>) : <EmptyState title="暂无动态" />}</div></div>
+                <div className="app-feature-card"><div className="app-feature-head"><h3>🪪 当前 Agent 详情</h3><span className="af-cnt">focus</span></div><div className="app-feature-body">{selectedAgentCard ? <div className="focus-panel"><div className="focus-panel-top"><span className="focus-avatar big">{selectedMeta.avatar}</span><div><strong>{selectedMeta.name}</strong><div className="fleet-sub">{selectedMeta.role}</div></div></div><div className="focus-kpis"><div><span>模型</span><strong>{currentSession?.model || selectedAgentCard.model || '-'}</strong></div><div><span>会话</span><strong>{selectedAgentCard.sessionsCount || 0}</strong></div><div><span>Token</span><strong>{number(selectedAgentCard.totalTokens)}</strong></div></div></div> : <EmptyState title="未选择 Agent" />}</div></div>
+                <div className="app-feature-card"><div className="app-feature-head"><h3>📡 操作日志</h3><span className="af-cnt">{logEntries.length}</span></div><div className="app-feature-body">{logEntries.length ? logEntries.map((s, i) => <div key={s.sessionId || i} className="log-row"><span className={`log-tag ${sessionState(s)}`}>{sessionState(s)}</span><div className="log-main"><strong>{s.agentId}</strong><span>{s.model || '-'}</span></div><span className="log-time">{ageText(s.age)}</span></div>) : <EmptyState title="暂无日志" />}</div></div>
               </div>
             </>
-          ) : (
-            <EmptyState message="暂无使用统计数据" sub="开始对话后数据将自动生成" />
           )}
-        </SectionCard>
 
-        {/* Agent 详情 */}
-        <SectionCard title={`Agent 详情：${selectedAgent || '-'}`}>
-          {agentDetailLoading ? (
-            <div className="skeleton-pre" />
-          ) : agentDetail?.error ? (
-            <div className="empty">{agentDetail.error}</div>
-          ) : (
+          {activeTab === 'memory' && (
             <>
-              <pre>{formatJson(agentDetail?.agent)}</pre>
-              <h3>最近会话</h3>
-              {(agentDetail?.sessions || []).length === 0 ? (
-                <EmptyState message="暂无会话记录" sub="该 Agent 尚未产生会话" />
+              <div className="app-section-header"><div><h2 className="app-section-title">记忆中心</h2><p className="app-section-sub">日志与用量分开看</p></div><div className="memory-switch"><button className={memoryView==='logs'?'active':''} onClick={() => setMemoryView('logs')}>记忆日志</button><button className={memoryView==='usage'?'active':''} onClick={() => setMemoryView('usage')}>记忆用量</button></div></div>
+              {memoryView === 'logs' ? (
+                <div className="app-feature-card"><div className="app-feature-head"><h3>🪵 记忆日志</h3><span className="af-cnt">{logEntries.length}</span></div><div className="app-feature-body">{logEntries.length ? logEntries.map((s, i) => <div key={s.sessionId || i} className="memory-row"><strong>{s.agentId}</strong><span>{s.model || '-'}</span><span>{ageText(s.age)}</span></div>) : <EmptyState title="暂无记忆日志" />}</div></div>
               ) : (
-                <div className="table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Session</th>
-                        <th>模型</th>
-                        <th>Token</th>
-                        <th>最近活跃</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {(agentDetail?.sessions || []).map((item, idx) => (
-                        <tr key={item.sessionId || idx} onClick={() => setSelectedSession(item)}>
-                          <td>{item.key || item.sessionId || '-'}</td>
-                          <td>{item.model || '-'}</td>
-                          <td>{number(item.totalTokens)}</td>
-                          <td>{ageText(item.age)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                <div className="app-feature-grid"><BarList title="模型使用分布" items={modelBars} /><BarList title="Agent 使用分布" items={agentBars} /></div>
               )}
             </>
           )}
-        </SectionCard>
 
-        {/* 最近会话样本 */}
-        <SectionCard
-          title="最近会话样本"
-          extra={<span className="pill">{loading ? '-' : recentSessions.length} 条</span>}
-        >
-          {loading ? (
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr><th>Agent</th><th>Session Key</th><th>模型</th><th>Token</th><th>上下文占用</th></tr>
-                </thead>
-                <tbody>
-                  <SkeletonRow cols={5} />
-                  <SkeletonRow cols={5} />
-                  <SkeletonRow cols={5} />
-                </tbody>
-              </table>
-            </div>
-          ) : recentSessions.length === 0 ? (
-            <EmptyState
-              message="暂无会话样本"
-              sub="所有 Agent 暂无 session 记录，数据将在首次对话后出现"
-            />
-          ) : (
-            <div className="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Agent</th>
-                    <th>Session Key</th>
-                    <th>模型</th>
-                    <th>Token</th>
-                    <th>上下文占用</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {recentSessions.map((item, idx) => (
-                    <tr key={item.sessionId || idx} onClick={() => setSelectedSession(item)}>
-                      <td>{item.agentId || '-'}</td>
-                      <td>{item.key || '-'}</td>
-                      <td>{item.model || '-'}</td>
-                      <td>{number(item.totalTokens)}</td>
-                      <td>{item.percentUsed != null ? `${item.percentUsed}%` : '-'}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          {activeTab === 'sessions' && (
+            <>
+              <div className="app-section-header"><div><h2 className="app-section-title">会话管理</h2><p className="app-section-sub">当前所有 session 列表</p></div></div>
+              <div className="app-feature-card"><div className="app-feature-head"><h3>💬 Sessions</h3><span className="af-cnt">{recentSessions.length}</span></div><div className="app-feature-body">{recentSessions.length ? recentSessions.map((s, i) => <button key={s.sessionId || i} className="session-row-card" onClick={() => setSelectedSession(s)}><div className="session-row-top"><div className="session-row-title">{s.agentId} · {s.key || s.sessionId || '-'}</div><div className="session-row-time">{ageText(s.age)}</div></div><div className="session-row-meta">模型：{s.model || '-'} · Token：{number(s.totalTokens || 0)} · Context：{s.percentUsed != null ? `${s.percentUsed}%` : '-'}</div></button>) : <EmptyState title="暂无会话" />}</div></div>
+            </>
           )}
-        </SectionCard>
-      </section>
 
-      {/* ── 会话详情抽屉 ── */}
+          {activeTab === 'stats' && (
+            <>
+              <div className="app-section-header"><div><h2 className="app-section-title">数据统计</h2><p className="app-section-sub">总体指标与分布</p></div></div>
+              <div className="app-status-grid">
+                <div className="app-status-card info"><div className="as-label">TOKENS</div><div className="as-value">{number(usage?.totals?.totalTokens)}</div><div className="as-sub">总 Token</div></div>
+                <div className="app-status-card ok"><div className="as-label">SESSIONS</div><div className="as-value">{summary.totalSessions || 0}</div><div className="as-sub">总会话</div></div>
+                <div className="app-status-card warn"><div className="as-label">AGENTS</div><div className="as-value">{summary.totalAgents || 0}</div><div className="as-sub">总智能体</div></div>
+                <div className="app-status-card info"><div className="as-label">MODEL</div><div className="as-value">{summary.defaultModel || '-'}</div><div className="as-sub">默认模型</div></div>
+              </div>
+              <div className="app-feature-grid">
+                <BarList title="模型使用分布" items={modelBars} />
+                <BarList title="Agent 使用分布" items={agentBars} />
+                <div className="app-feature-card full"><div className="app-feature-head"><h3>🧾 系统概览</h3><span className="af-cnt">summary</span></div><div className="app-feature-body"><pre>{formatJson(summary)}</pre></div></div>
+              </div>
+            </>
+          )}
+        </main>
+      </div>
+
       {selectedSession ? (
         <div className="drawer-backdrop" onClick={() => setSelectedSession(null)}>
-          <aside className="drawer card" onClick={(e) => e.stopPropagation()}>
-            <div className="section-head">
-              <h2>会话详情</h2>
-              <button onClick={() => setSelectedSession(null)}>关闭</button>
-            </div>
+          <aside className="drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="drawer-head"><h2>会话详情</h2><button onClick={() => setSelectedSession(null)}>关闭</button></div>
             <pre>{formatJson(selectedSession)}</pre>
           </aside>
         </div>
@@ -527,5 +343,3 @@ function App() {
     </div>
   )
 }
-
-export default App

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard Mockup</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #131c2f;
+      --panel-2: #182235;
+      --border: rgba(148, 163, 184, 0.16);
+      --text: #eef4ff;
+      --muted: #94a3b8;
+      --blue: #60a5fa;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --purple: #a78bfa;
+      --shadow: 0 18px 48px rgba(0,0,0,0.28);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(167,139,250,0.12), transparent 24%),
+        var(--bg);
+    }
+    .shell {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .header {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(19,28,47,0.96), rgba(17,24,39,0.92));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 24px;
+    }
+    .hero-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .logo {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(96,165,250,0.2), rgba(167,139,250,0.22));
+      font-size: 28px;
+    }
+    .eyebrow {
+      color: #7dd3fc;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.1;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: #d9e6fb;
+      background: rgba(22,32,50,0.85);
+      font-size: 14px;
+    }
+    .tab.active {
+      background: linear-gradient(135deg, rgba(59,130,246,.38), rgba(96,165,250,.18));
+      border-color: rgba(96,165,250,.4);
+    }
+    .hero-side {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .mini {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(20,30,48,0.82);
+      padding: 14px 16px;
+    }
+    .mini-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+    .pill-row, .strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pill.green { color: #86efac; background: rgba(52,211,153,.14); }
+    .pill.blue { color: #93c5fd; background: rgba(96,165,250,.14); }
+    .pill.yellow { color: #fde68a; background: rgba(251,191,36,.14); }
+    .focus {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .focus-agent { display: flex; gap: 12px; align-items: center; }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: rgba(124,58,237,.18);
+      font-size: 22px;
+    }
+    .focus strong { display: block; font-size: 15px; }
+    .focus span { color: var(--muted); font-size: 12px; }
+    .metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .metric {
+      padding: 10px 12px;
+      background: rgba(15,23,42,.72);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+    .metric small { display: block; color: var(--muted); margin-bottom: 6px; }
+    .metric strong { font-size: 16px; }
+    .actions {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 14px 16px;
+    }
+    .refresh {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white; border: 0; border-radius: 14px; padding: 10px 16px;
+    }
+    .time { color: var(--muted); font-size: 12px; }
+    .strip {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(17,26,42,0.9);
+    }
+    .strip-item { display: flex; flex-direction: column; gap: 6px; min-width: 140px; }
+    .strip-label { color: var(--muted); font-size: 11px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 18px;
+    }
+    .sidebar {
+      padding: 14px 0;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(15,23,42,0.9);
+      box-shadow: var(--shadow);
+    }
+    .section { padding: 0 14px; margin-bottom: 18px; }
+    .section h3 {
+      margin: 0 0 8px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 12px; color: var(--text);
+      margin-bottom: 4px; background: transparent; border: 0;
+    }
+    .nav-item.active { background: rgba(30,41,59,.9); }
+    .nav-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--green); margin-left: auto; }
+    .content { display: flex; flex-direction: column; gap: 18px; }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    .metric-card {
+      padding: 18px; border-radius: 18px; border: 1px solid var(--border);
+      background: rgba(18,28,45,.9); box-shadow: var(--shadow);
+    }
+    .metric-card small { color: var(--muted); display: block; margin-bottom: 10px; }
+    .metric-card strong { font-size: 28px; display: block; margin-bottom: 6px; }
+    .metric-card span { color: var(--muted); font-size: 13px; }
+    .focus-panel {
+      padding: 18px; border-radius: 20px; border: 1px solid var(--border);
+      background: rgba(18,28,45,.92); box-shadow: var(--shadow);
+    }
+    .panel-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+    .panel-head h2 { margin:0; font-size:20px; }
+    .panel-head span { color: var(--muted); font-size: 13px; }
+    .focus-main {
+      display:flex; justify-content:space-between; align-items:center; gap:18px;
+    }
+    .focus-left { display:flex; gap:14px; align-items:center; }
+    .focus-avatar-large {
+      width:54px; height:54px; border-radius:18px; display:grid; place-items:center;
+      font-size:26px; background: rgba(124,58,237,.18);
+    }
+    .focus-kpis {
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; min-width: 420px;
+    }
+    .focus-kpi {
+      padding: 12px; border-radius: 14px; background: rgba(15,23,42,.72); border:1px solid var(--border);
+    }
+    .focus-kpi small { display:block; color: var(--muted); margin-bottom: 6px; }
+    .focus-kpi strong { font-size: 16px; }
+    .two-col {
+      display:grid; grid-template-columns: 1.1fr .9fr; gap: 18px;
+    }
+    .panel {
+      padding:18px; border-radius:20px; border:1px solid var(--border); background: rgba(18,28,45,.92); box-shadow: var(--shadow);
+    }
+    .feed-list { display:flex; flex-direction:column; gap:12px; }
+    .feed-item {
+      padding: 14px; border-radius: 14px; border:1px solid var(--border); background: rgba(14,22,36,.84);
+    }
+    .feed-top { display:flex; justify-content:space-between; gap:12px; margin-bottom:8px; }
+    .feed-title { font-weight:700; margin-bottom:4px; }
+    .feed-sub, .feed-meta { color: var(--muted); font-size: 12px; }
+    .feed-meta { margin-top: 6px; }
+    .detail-list { display:flex; flex-direction:column; gap:10px; }
+    .detail-row {
+      padding: 12px 14px; border-radius: 14px; background: rgba(14,22,36,.84); border:1px solid var(--border);
+    }
+    .detail-row-top { display:flex; justify-content:space-between; gap:12px; margin-bottom:6px; }
+    .detail-row-title { font-weight:700; }
+    .detail-row-meta { color: var(--muted); font-size: 12px; }
+    .usage-box { display:flex; flex-direction:column; gap:12px; }
+    .bar-row-top { display:flex; justify-content:space-between; gap:12px; margin-bottom:6px; font-size: 13px; }
+    .bar-track { height:8px; border-radius:999px; background: rgba(148,163,184,.14); overflow:hidden; }
+    .bar-fill { height:100%; border-radius:999px; background: linear-gradient(90deg, #60a5fa, #a78bfa); }
+    @media (max-width: 1100px) {
+      .header, .layout, .two-col, .split, .metrics-grid, .focus-kpis { grid-template-columns: 1fr; }
+      .focus-main { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <div class="card hero">
+        <div class="hero-top">
+          <div class="logo">🦞</div>
+          <div>
+            <div class="eyebrow">AI Team Console</div>
+            <h1>Agent Dashboard</h1>
+            <p class="subtitle">更顺眼、更克制的多智能体状态面板</p>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tab active">📊 总览</div>
+          <div class="tab">📡 监控</div>
+          <div class="tab">💬 会话</div>
+          <div class="tab">📈 统计</div>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <div class="split">
+          <div class="mini">
+            <div class="mini-label">团队状态</div>
+            <div class="pill-row">
+              <div class="pill green">在线 4/4</div>
+              <div class="pill blue">同步正常</div>
+            </div>
+            <div style="margin-top:10px;color:var(--muted);font-size:12px;">更新于 17:00</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">当前焦点</div>
+            <div class="focus">
+              <div class="focus-agent">
+                <div class="avatar">🐉</div>
+                <div>
+                  <strong>龙龙</strong>
+                  <span>主控智能体</span>
+                </div>
+              </div>
+              <div class="pill green">活跃</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric"><small>模型</small><strong>gpt-5.4</strong></div>
+              <div class="metric"><small>会话</small><strong>12</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="strip">
+          <div class="strip-item"><span class="strip-label">当前 Agent</span><span class="pill purple">🐉 龙龙</span></div>
+          <div class="strip-item"><span class="strip-label">运行模型</span><span class="pill blue">gpt-5.4</span></div>
+          <div class="strip-item"><span class="strip-label">在线数</span><span class="pill green">4 / 4</span></div>
+          <div class="strip-item"><span class="strip-label">当前状态</span><span class="pill yellow">活跃</span></div>
+        </div>
+        <div class="actions">
+          <button class="refresh">↻ 刷新</button>
+          <div class="time">最后更新：17:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <div class="section">
+          <h3>智能体</h3>
+          <button class="nav-item active"><span>🐉</span><span>龙龙</span><span class="nav-dot"></span></button>
+          <button class="nav-item"><span>🔧</span><span>构建者</span><span class="nav-dot"></span></button>
+          <button class="nav-item"><span>📋</span><span>规划师</span><span class="nav-dot"></span></button>
+          <button class="nav-item"><span>🔍</span><span>质检员</span><span class="nav-dot"></span></button>
+        </div>
+        <div class="section">
+          <h3>视图</h3>
+          <button class="nav-item active"><span>📊</span><span>总览</span></button>
+          <button class="nav-item"><span>📡</span><span>监控</span></button>
+          <button class="nav-item"><span>💬</span><span>会话</span></button>
+          <button class="nav-item"><span>📈</span><span>统计</span></button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="metrics-grid">
+          <div class="metric-card"><small>智能体总数</small><strong>4</strong><span>默认 Agent：main</span></div>
+          <div class="metric-card"><small>在线状态</small><strong>4</strong><span>全部在线</span></div>
+          <div class="metric-card"><small>总会话数</small><strong>23</strong><span>近期数据</span></div>
+          <div class="metric-card"><small>当前模型</small><strong>gpt-5.4</strong><span>默认模型</span></div>
+        </div>
+
+        <div class="focus-panel">
+          <div class="panel-head"><h2>当前 Agent</h2><span>先看全局，再看当前焦点</span></div>
+          <div class="focus-main">
+            <div class="focus-left">
+              <div class="focus-avatar-large">🐉</div>
+              <div>
+                <strong style="font-size:22px;display:block;margin-bottom:6px;">龙龙</strong>
+                <div style="color:var(--muted);font-size:14px;">主控智能体 · 最近活跃：刚刚</div>
+              </div>
+            </div>
+            <div class="focus-kpis">
+              <div class="focus-kpi"><small>状态</small><strong>活跃</strong></div>
+              <div class="focus-kpi"><small>会话数</small><strong>12</strong></div>
+              <div class="focus-kpi"><small>Token</small><strong>84,642</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h2>最近动态</h2><span>一条一条读得明白</span></div>
+            <div class="feed-list">
+              <div class="feed-item">
+                <div class="feed-top"><span>main · gpt-5.4</span><span>1 分钟前</span></div>
+                <div class="feed-title">Session: agent:main:feishu:direct:...</div>
+                <div class="feed-sub">系统对话 · 正在响应</div>
+                <div class="feed-meta">84,642 tokens</div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-top"><span>planner · MiniMax-M2.7</span><span>8 分钟前</span></div>
+                <div class="feed-title">Session: agent:planner:subagent:...</div>
+                <div class="feed-sub">规划任务 · 最近完成</div>
+                <div class="feed-meta">31,151 tokens</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Agent 详情</h2><span>左看动态，右看详情</span></div>
+            <div class="detail-list">
+              <div class="detail-row">
+                <div class="detail-row-top"><div class="detail-row-title">当前会话</div><div>活跃</div></div>
+                <div class="detail-row-meta">agent:main:feishu:direct:...</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-row-top"><div class="detail-row-title">当前模型</div><div>主链</div></div>
+                <div class="detail-row-meta">gpt-5.4</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-row-top"><div class="detail-row-title">最近活跃</div><div>刚刚</div></div>
+                <div class="detail-row-meta">在线且有近期动作</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel usage-box">
+            <div class="panel-head"><h2>模型使用分布</h2><span>轻量可视化</span></div>
+            <div>
+              <div class="bar-row-top"><span>gpt-5.4</span><strong>84,642</strong></div>
+              <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+            </div>
+            <div>
+              <div class="bar-row-top"><span>MiniMax-M2.7</span><strong>31,151</strong></div>
+              <div class="bar-track"><div class="bar-fill" style="width:36%"></div></div>
+            </div>
+          </div>
+          <div class="panel usage-box">
+            <div class="panel-head"><h2>Agent 使用分布</h2><span>谁最忙一眼可见</span></div>
+            <div>
+              <div class="bar-row-top"><span>main</span><strong>120,000</strong></div>
+              <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+            </div>
+            <div>
+              <div class="bar-row-top"><span>planner</span><strong>31,151</strong></div>
+              <div class="bar-track"><div class="bar-fill" style="width:26%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
