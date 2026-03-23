@@ -121,12 +121,18 @@ agent-dashboard/
 
 ---
 
-## 一键启动
+## 一键启动（推荐，确保跑的是最新代码）
 
 在项目目录执行：
 
 ```bash
-./start.sh
+npm run restart:latest
+```
+
+或：
+
+```bash
+./start-prod.sh
 ```
 
 停止服务：
@@ -135,9 +141,16 @@ agent-dashboard/
 ./stop.sh
 ```
 
+启动脚本会先：
+- 停掉旧的 dashboard 进程
+- 重新 build 前端
+- 启动最新后端 `server.js`
+- 启动带 `/api` 代理的 preview
+
 启动后默认可访问：
 - 页面：`http://<server-ip>:4173/`
-- API：`http://<server-ip>:4173/api/health`
+- API（走前端代理）：`http://<server-ip>:4173/api/health`
+- API（直连后端）：`http://127.0.0.1:3456/api/health`
 
 ---
 
@@ -160,8 +173,25 @@ npm run dev:api
 
 ### 3. 启动前端
 
+开发模式：
+
 ```bash
 npm run dev -- --host 0.0.0.0 --port 4173
+```
+
+默认会把 `/api` 代理到：
+- `http://127.0.0.1:3456`
+
+如需临时改后端地址：
+
+```bash
+VITE_API_TARGET=http://127.0.0.1:3456 npm run dev -- --host 0.0.0.0 --port 4173
+```
+
+生产预览模式（更接近稳定联调）：
+
+```bash
+npm run restart:latest
 ```
 
 默认地址：
@@ -175,13 +205,34 @@ npm run dev -- --host 0.0.0.0 --port 4173
 查看服务和缓存刷新状态。
 
 ### `GET /api/overview`
-查看仪表盘总览数据。
+查看仪表盘总览数据，同时返回当前推荐预览入口：
+- `config.preview.web`
+- `config.preview.apiViaWebProxy`
+- `config.preview.directApi`
 
 ### `GET /api/agents`
-查看所有 Agent 列表。
+查看所有 Agent 列表，并附带当前推荐预览入口。
+
+### `GET /api/agents/:id/profile`
+查看单个 Agent 的语义档案详情。
 
 ### `GET /api/agent/:id`
-查看单个 Agent 详情。
+兼容接口。查看单个 Agent 详情，并额外返回：
+- `profile`: 当前 Agent 语义档案
+- `tasks`: 当前 Agent 关联任务列表
+- `preview`: 当前推荐预览入口
+
+### `GET /api/tasks`
+查看任务列表。
+
+### `POST /api/tasks`
+创建手工任务。
+
+### `PATCH /api/tasks/:id`
+更新手工任务（仅 `writable=true` 的 manual task 可写）。
+
+### `GET /api/runs`
+查看运行单元列表。
 
 ### `GET /api/refresh`
 触发一次后台刷新。

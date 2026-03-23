@@ -7,12 +7,28 @@
 npm install
 ```
 
-### 启动后端
+### 推荐启动（今晚交付优先）
+统一走最新构建 + 最新 API + preview 代理：
+
+```bash
+npm run restart:latest
+```
+
+或：
+
+```bash
+./start-prod.sh
+```
+
+这样可以尽量避免“代码改了，但页面还在吃旧 dev server / 旧 preview / 旧 API”的错位问题。
+
+### 如需分开调试
+#### 启动后端
 ```bash
 npm run dev:api
 ```
 
-### 启动前端
+#### 启动前端
 ```bash
 npm run dev -- --host 0.0.0.0 --port 4173
 ```
@@ -30,16 +46,17 @@ npm run dev -- --host 0.0.0.0 --port 4173
 
 ## 线上部署建议
 
-### 方案 1：先按当前 MVP 跑
-- 前端跑在 Vite dev server
-- 后端单独跑 Node 服务
-- 用 Nginx/Caddy 做统一反向代理
+### 方案 1：今晚交付 / 最稳本地预览
+- API 跑在 Node 服务
+- Web 跑在 `vite preview`
+- 每次启动前先重新 `build`
+- 统一通过 `/api` 代理访问后端
 
-### 方案 2：后续整理成正式生产版
-- 构建前端静态文件
-- 后端独立守护
-- Nginx 统一接入 HTTPS
-- 域名访问
+### 方案 2：systemd 常驻
+- API 用 `agent-dashboard-api.service`
+- Web 用 `agent-dashboard-web.service`
+- Web 服务启动前自动重新 `build`
+- 统一保持 preview 与 API 目标一致
 
 ---
 

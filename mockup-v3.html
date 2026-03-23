@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard UI Mockup V3</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-2: #0b1426;
+      --panel: rgba(13, 21, 38, 0.92);
+      --panel-2: rgba(18, 29, 49, 0.92);
+      --border: rgba(148, 163, 184, 0.14);
+      --border-strong: rgba(96, 165, 250, 0.24);
+      --text: #eef4ff;
+      --muted: #8ea0bc;
+      --blue: #60a5fa;
+      --blue-2: #3b82f6;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #f87171;
+      --purple: #a78bfa;
+      --cyan: #67e8f9;
+      --shadow: 0 22px 56px rgba(0,0,0,.34);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(167,139,250,.12), transparent 26%),
+        linear-gradient(180deg, #08111f 0%, #0a1322 100%);
+    }
+
+    .page {
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(17,26,43,.96), rgba(10,17,30,.96));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .top-strip {
+      display: grid;
+      grid-template-columns: minmax(340px, 1.2fr) repeat(5, minmax(120px, .42fr)) 128px;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .brand {
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.22));
+      border: 1px solid rgba(96,165,250,.18);
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .brand h1 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      line-height: 1.05;
+    }
+
+    .brand p,
+    .mini span,
+    .summary small,
+    .section-head p,
+    .muted,
+    .row span,
+    .feed-meta,
+    .agent-meta,
+    .tiny,
+    .footer-note {
+      color: var(--muted);
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .mini {
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .mini span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+
+    .mini strong {
+      font-size: 20px;
+      line-height: 1.05;
+    }
+
+    .mini em {
+      font-style: normal;
+      font-size: 12px;
+      margin-top: 8px;
+      color: #cfe0fb;
+      opacity: .9;
+    }
+
+    .refresh {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .refresh button {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .summary {
+      padding: 16px 18px;
+    }
+
+    .summary span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .summary strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+
+    .summary small {
+      display: block;
+      font-size: 13px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .sidebar {
+      padding: 16px;
+    }
+
+    .nav-group + .nav-group {
+      margin-top: 18px;
+    }
+
+    .nav-title {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      margin-bottom: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+    }
+
+    .nav-item.active {
+      background: rgba(30,41,59,.92);
+      border-color: rgba(96,165,250,.18);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(59,130,246,.12);
+      font-size: 18px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+    }
+
+    .dot.green { background: var(--green); }
+    .dot.blue { background: var(--blue); }
+    .dot.yellow { background: var(--yellow); }
+
+    .main {
+      display: grid;
+      gap: 16px;
+    }
+
+    .focus-card {
+      padding: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2,
+    .section-head h3 {
+      margin: 0 0 6px;
+      line-height: 1.08;
+    }
+
+    .section-head p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.green { color: #86efac; background: rgba(52,211,153,.14); }
+    .badge.blue { color: #93c5fd; background: rgba(96,165,250,.14); }
+    .badge.yellow { color: #fde68a; background: rgba(251,191,36,.14); }
+
+    .focus-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(420px, .8fr);
+      gap: 14px;
+    }
+
+    .focus-main {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(16,25,42,.92), rgba(12,19,31,.92));
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .focus-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .focus-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      background: linear-gradient(135deg, rgba(124,58,237,.18), rgba(96,165,250,.16));
+      border: 1px solid rgba(124,58,237,.18);
+      flex: 0 0 auto;
+    }
+
+    .focus-name {
+      font-size: 24px;
+      margin: 0 0 6px;
+    }
+
+    .focus-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .highlight-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(16,27,44,.78);
+      border: 1px solid rgba(148,163,184,.1);
+      font-size: 12px;
+      color: #d7e4f8;
+    }
+
+    .focus-note {
+      border-top: 1px solid rgba(148,163,184,.1);
+      padding-top: 14px;
+      font-size: 13px;
+      color: #d6e4ff;
+      line-height: 1.6;
+    }
+
+    .focus-side {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(13,21,35,.86);
+      padding: 14px;
+      min-height: 104px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .metric strong {
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    .metric small {
+      color: #bfd0ea;
+      font-size: 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .feed-list,
+    .agent-list,
+    .detail-list,
+    .bar-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .feed-item,
+    .agent-row,
+    .row,
+    .bar-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(11,18,31,.82);
+    }
+
+    .feed-item {
+      padding: 14px;
+    }
+
+    .feed-top,
+    .agent-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .feed-main {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .feed-meta {
+      font-size: 12px;
+    }
+
+    .agent-row {
+      padding: 12px 14px;
+    }
+
+    .agent-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    .agent-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .agent-meta div {
+      border-radius: 10px;
+      background: rgba(255,255,255,.02);
+      padding: 8px;
+    }
+
+    .bar-item {
+      padding: 14px;
+    }
+
+    .bar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .track {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148,163,184,.12);
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 14px;
+    }
+
+    .row strong {
+      text-align: right;
+    }
+
+    .detail-note {
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(7,12,22,.72);
+      color: #d8e6ff;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 1320px) {
+      .top-strip {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .layout,
+      .focus-body,
+      .grid-2,
+      .summary-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-strip">
+      <div class="card brand">
+        <div class="logo">🦞</div>
+        <div>
+          <div class="eyebrow">Agent Dashboard</div>
+          <h1>多智能体运行总览</h1>
+          <p>顶部看系统，第一屏看焦点，中段看活动与团队，下面看统计与配置。</p>
+        </div>
+      </div>
+
+      <div class="card mini">
+        <span>系统状态</span>
+        <strong>正常</strong>
+        <em>API / 页面同步正常</em>
+      </div>
+
+      <div class="card mini">
+        <span>在线 Agent</span>
+        <strong>4 / 4</strong>
+        <em>全部在线</em>
+      </div>
+
+      <div class="card mini">
+        <span>活跃 Session</span>
+        <strong>26</strong>
+        <em>近 1 小时可见</em>
+      </div>
+
+      <div class="card mini">
+        <span>默认模型</span>
+        <strong>Opus</strong>
+        <em>Claude Opus 4.6</em>
+      </div>
+
+      <div class="card mini">
+        <span>最后更新</span>
+        <strong>00:26</strong>
+        <em>自动刷新 15 秒</em>
+      </div>
+
+      <div class="card refresh">
+        <button>刷新</button>
+      </div>
+    </div>
+
+    <div class="summary-row">
+      <div class="card summary">
+        <span>当前主控</span>
+        <strong>龙龙</strong>
+        <small>正在处理主会话与系统汇总</small>
+      </div>
+      <div class="card summary">
+        <span>当前焦点模型</span>
+        <strong>Opus 4.6</strong>
+        <small>主控与关键判断优先使用</small>
+      </div>
+      <div class="card summary">
+        <span>当前负载</span>
+        <strong>242,559</strong>
+        <small>累计 token 使用量</small>
+      </div>
+      <div class="card summary">
+        <span>缓存状态</span>
+        <strong>正常</strong>
+        <small>未进入降级模式</small>
+      </div>
+    </div>
+
+    <div class="layout">
+      <aside class="card sidebar">
+        <div class="nav-group">
+          <div class="nav-title">视图</div>
+          <div class="nav-item active"><div class="nav-left"><div class="avatar">📊</div><div>总览</div></div></div>
+          <div class="nav-item"><div class="nav-left"><div class="avatar">🤖</div><div>Agents</div></div></div>
+          <div class="nav-item"><div class="nav-left"><div class="avatar">💬</div><div>Sessions</div></div></div>
+          <div class="nav-item"><div class="nav-left"><div class="avatar">📈</div><div>Usage</div></div></div>
+          <div class="nav-item"><div class="nav-left"><div class="avatar">⚙️</div><div>Config</div></div></div>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-title">智能体</div>
+          <div class="nav-item active">
+            <div class="nav-left"><div class="avatar">🐉</div><div>龙龙</div></div>
+            <div class="dot green"></div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-left"><div class="avatar">📋</div><div>规划师</div></div>
+            <div class="dot blue"></div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-left"><div class="avatar">🔧</div><div>执行者</div></div>
+            <div class="dot blue"></div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-left"><div class="avatar">🔍</div><div>质检员</div></div>
+            <div class="dot yellow"></div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="card focus-card">
+          <div class="section-head">
+            <div>
+              <h2>当前焦点</h2>
+              <p>一眼看清当前谁在工作、工作强度如何、系统是否稳定。</p>
+            </div>
+            <div class="badge green">活跃运行中</div>
+          </div>
+
+          <div class="focus-body">
+            <div class="focus-main">
+              <div>
+                <div class="focus-top">
+                  <div class="focus-icon">🐉</div>
+                  <div>
+                    <h3 class="focus-name">龙龙</h3>
+                    <p class="focus-desc">主控 Agent · 当前负责用户会话、任务汇总与整体调度</p>
+                  </div>
+                </div>
+
+                <div class="highlight-row">
+                  <div class="chip">当前模型：Claude Opus 4.6</div>
+                  <div class="chip">最近活跃：刚刚</div>
+                  <div class="chip">当前状态：活跃</div>
+                  <div class="chip">会话数：26</div>
+                </div>
+              </div>
+
+              <div class="focus-note">
+                这一块承担首页主判断区的职责：不展示长 ID，不展示 Session Key，
+                只保留对状态判断、负载感知、焦点确认真正有价值的信息。
+              </div>
+            </div>
+
+            <div class="focus-side">
+              <div class="metric">
+                <span>当前模型</span>
+                <strong>Claude Opus 4.6</strong>
+                <small>主控高质量判断</small>
+              </div>
+              <div class="metric">
+                <span>最近活跃</span>
+                <strong>2 分钟前</strong>
+                <small>持续有会话输入</small>
+              </div>
+              <div class="metric">
+                <span>会话数</span>
+                <strong>26</strong>
+                <small>当前可见 Session</small>
+              </div>
+              <div class="metric">
+                <span>Token 使用</span>
+                <strong>242,559</strong>
+                <small>当前累计消耗</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid-2">
+          <section class="card panel">
+            <div class="section-head">
+              <div>
+                <h3>最近动态</h3>
+                <p>最近发生了什么，一眼看清，不放长字段。</p>
+              </div>
+              <div class="badge blue">6 条</div>
+            </div>
+            <div class="feed-list">
+              <div class="feed-item">
+                <div class="feed-top"><strong>龙龙</strong><span class="feed-meta">2 分钟前</span></div>
+                <div class="feed-main">Claude Opus 4.6</div>
+                <div class="feed-meta">174,442 tokens · 主会话正在推进中</div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-top"><strong>龙龙</strong><span class="feed-meta">41 分钟前</span></div>
+                <div class="feed-main">MiniMax-M2.5</div>
+                <div class="feed-meta">68,117 tokens · 历史会话归档可见</div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-top"><strong>规划师</strong><span class="feed-meta">1 小时前</span></div>
+                <div class="feed-main">GPT-5.4</div>
+                <div class="feed-meta">等待下一轮任务分配</div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-top"><strong>执行者</strong><span class="feed-meta">1 小时前</span></div>
+                <div class="feed-main">GPT-5.4</div>
+                <div class="feed-meta">前端实现任务可继续接入</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card panel">
+            <div class="section-head">
+              <div>
+                <h3>Agent 快览</h3>
+                <p>从当前焦点扩展到整个团队，补齐首页信息密度。</p>
+              </div>
+              <div class="badge yellow">4 个 Agent</div>
+            </div>
+            <div class="agent-list">
+              <div class="agent-row">
+                <div class="agent-top">
+                  <div class="agent-name"><div class="avatar">🐉</div>龙龙</div>
+                  <div class="badge green">活跃</div>
+                </div>
+                <div class="agent-meta">
+                  <div>模型<br><strong>Opus 4.6</strong></div>
+                  <div>最近活跃<br><strong>刚刚</strong></div>
+                  <div>会话数<br><strong>26</strong></div>
+                </div>
+              </div>
+              <div class="agent-row">
+                <div class="agent-top">
+                  <div class="agent-name"><div class="avatar">📋</div>规划师</div>
+                  <div class="badge blue">在线</div>
+                </div>
+                <div class="agent-meta">
+                  <div>模型<br><strong>GPT-5.4</strong></div>
+                  <div>最近活跃<br><strong>1h</strong></div>
+                  <div>会话数<br><strong>2</strong></div>
+                </div>
+              </div>
+              <div class="agent-row">
+                <div class="agent-top">
+                  <div class="agent-name"><div class="avatar">🔧</div>执行者</div>
+                  <div class="badge blue">在线</div>
+                </div>
+                <div class="agent-meta">
+                  <div>模型<br><strong>GPT-5.4</strong></div>
+                  <div>最近活跃<br><strong>1h</strong></div>
+                  <div>会话数<br><strong>3</strong></div>
+                </div>
+              </div>
+              <div class="agent-row">
+                <div class="agent-top">
+                  <div class="agent-name"><div class="avatar">🔍</div>质检员</div>
+                  <div class="badge yellow">空闲</div>
+                </div>
+                <div class="agent-meta">
+                  <div>模型<br><strong>MiniMax</strong></div>
+                  <div>最近活跃<br><strong>2h</strong></div>
+                  <div>会话数<br><strong>1</strong></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="grid-2">
+          <section class="card panel">
+            <div class="section-head">
+              <div>
+                <h3>使用统计</h3>
+                <p>先用轻量图形表达，不上重图表库。</p>
+              </div>
+            </div>
+            <div class="bar-list">
+              <div class="bar-item">
+                <div class="bar-top"><span>Claude Opus 4.6</span><strong>174,442</strong></div>
+                <div class="track"><div class="fill" style="width:100%"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-top"><span>MiniMax-M2.5</span><strong>68,117</strong></div>
+                <div class="track"><div class="fill" style="width:39%"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-top"><span>GPT-5.4</span><strong>12,330</strong></div>
+                <div class="track"><div class="fill" style="width:8%"></div></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card panel">
+            <div class="section-head">
+              <div>
+                <h3>配置摘要</h3>
+                <p>只放首页需要判断的配置，不放底层长字段。</p>
+              </div>
+            </div>
+            <div class="detail-list">
+              <div class="row"><span>默认模型</span><strong>Claude Opus 4.6</strong></div>
+              <div class="row"><span>主控 Agent</span><strong>龙龙</strong></div>
+              <div class="row"><span>Agent → 模型映射</span><strong>龙龙 / 规划师 / 执行者 / 质检员</strong></div>
+              <div class="row"><span>自动刷新</span><strong>15 秒</strong></div>
+              <div class="row"><span>Provider</span><strong>wucur</strong></div>
+            </div>
+            <div class="detail-note">
+              Session Key、Session ID、原始 JSON 与调试信息都不进入首页主区，
+              后续统一下沉到详情层 / 抽屉层，避免破坏页面扫读效率。
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-note">Mockup V3 · 对应线框排版图 v2 的真实 UI 映射稿</div>
+  </div>
+</body>
+</html>

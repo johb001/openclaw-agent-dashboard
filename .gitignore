@@ -3,3 +3,5 @@ dist/
 .vite/
 .DS_Store
 *.log
+*.pid
+tmp-page.png

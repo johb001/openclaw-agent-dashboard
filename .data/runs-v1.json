@@ -1,0 +1,742 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-23T04:42:17.946Z",
+  "runs": [
+    {
+      "id": "run_main",
+      "agentId": "main",
+      "agentName": "龙龙",
+      "agentRole": "主控 Agent",
+      "status": "running",
+      "statusLabel": "深度运行中",
+      "riskLabel": "稳定运行",
+      "summary": "当前轨迹偏深度执行，说明它正在承担连续输出链路。",
+      "model": "claude-opus-4-6",
+      "totalTokens": 250842,
+      "contextPercent": 21,
+      "sessionCount": 10,
+      "lastActiveAgeMs": 77494,
+      "bootstrapPending": false,
+      "latestSession": {
+        "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+        "model": "claude-opus-4-6",
+        "totalTokens": 41056,
+        "percentUsed": 21,
+        "age": 77507
+      },
+      "createdAt": "2026-03-20T11:36:36.499Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "profile": {
+        "avatar": "🐉",
+        "style": "对外主表达 / 决策中枢",
+        "mission": "承接用户意图，统筹方向判断与结果输出。"
+      },
+      "events": [
+        {
+          "id": "run_main:session:b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 41056 资源 · 上下文 21%",
+          "at": "2026-03-23T04:41:00.439Z",
+          "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475"
+        },
+        {
+          "id": "run_main:session:03838719-b1cf-405c-b4d4-6ad34366e824",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 24632 资源 · 上下文 12%",
+          "at": "2026-03-23T04:34:35.790Z",
+          "sessionId": "03838719-b1cf-405c-b4d4-6ad34366e824"
+        },
+        {
+          "id": "run_main:session:696c90b4-0a6c-4517-9bf2-a4891e9597a7",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 28127 资源 · 上下文 14%",
+          "at": "2026-03-23T04:00:19.945Z",
+          "sessionId": "696c90b4-0a6c-4517-9bf2-a4891e9597a7"
+        },
+        {
+          "id": "run_main:context_changed:1774240802747:b7ce89",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "19% → 21%",
+          "at": "2026-03-23T04:40:02.747Z"
+        },
+        {
+          "id": "run_main:context_changed:1774240667863:ce2fc6",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "12% → 19%",
+          "at": "2026-03-23T04:37:47.863Z"
+        },
+        {
+          "id": "run_main:session_changed:1774240667863:027403",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "at": "2026-03-23T04:37:47.863Z",
+          "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475"
+        },
+        {
+          "id": "run_main:risk_changed:1774240473174:57f492",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "轻载运行 → 稳定运行",
+          "at": "2026-03-23T04:34:33.174Z"
+        },
+        {
+          "id": "run_main:context_changed:1774240473174:d10afc",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "18% → 12%",
+          "at": "2026-03-23T04:34:33.174Z"
+        },
+        {
+          "id": "run_main:session_changed:1774240473174:91a3fa",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "03838719-b1cf-405c-b4d4-6ad34366e824",
+          "at": "2026-03-23T04:34:33.174Z",
+          "sessionId": "03838719-b1cf-405c-b4d4-6ad34366e824"
+        },
+        {
+          "id": "run_main:risk_changed:1774240352546:bd5f0a",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 轻载运行",
+          "at": "2026-03-23T04:32:32.546Z"
+        },
+        {
+          "id": "run_main:context_changed:1774239977395:5d117f",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "16% → 18%",
+          "at": "2026-03-23T04:26:17.395Z"
+        },
+        {
+          "id": "run_main:context_changed:1774239813306:4d4211",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "14% → 16%",
+          "at": "2026-03-23T04:23:33.306Z"
+        },
+        {
+          "id": "run_main:context_changed:1774239662772:fa6100",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "13% → 14%",
+          "at": "2026-03-23T04:21:02.772Z"
+        },
+        {
+          "id": "run_main:context_changed:1774239557705:e9bb5b",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "12% → 13%",
+          "at": "2026-03-23T04:19:17.705Z"
+        },
+        {
+          "id": "run_main:status_changed:1774239347262:8d4bfd",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "轻载 / 待命 → 深度运行中",
+          "at": "2026-03-23T04:15:47.262Z"
+        },
+        {
+          "id": "run_main:context_changed:1774239347262:bdf172",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 12%",
+          "at": "2026-03-23T04:15:47.262Z"
+        },
+        {
+          "id": "run_main:status_changed:1774239258183:c23e62",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-23T04:14:18.183Z"
+        },
+        {
+          "id": "run_main:risk_changed:1774239258183:2c767a",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "轻载运行 → 稳定运行",
+          "at": "2026-03-23T04:14:18.183Z"
+        },
+        {
+          "id": "run_main:session_changed:1774239258183:c4b8e2",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "at": "2026-03-23T04:14:18.183Z",
+          "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475"
+        },
+        {
+          "id": "run_main:session:e0b708ab-a41e-478b-9a4e-844b30d1954a",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 17685 资源 · 上下文 9%",
+          "at": "2026-03-23T04:00:01.302Z",
+          "sessionId": "e0b708ab-a41e-478b-9a4e-844b30d1954a"
+        },
+        {
+          "id": "run_main:risk_changed:1774238987269:2a5065",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 轻载运行",
+          "at": "2026-03-23T04:09:47.269Z"
+        },
+        {
+          "id": "run_main:context_changed:1774238672164:ba937f",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "14% → 12%",
+          "at": "2026-03-23T04:04:32.164Z"
+        },
+        {
+          "id": "run_main:session_changed:1774238672164:3d32f2",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "03838719-b1cf-405c-b4d4-6ad34366e824",
+          "at": "2026-03-23T04:04:32.164Z",
+          "sessionId": "03838719-b1cf-405c-b4d4-6ad34366e824"
+        },
+        {
+          "id": "run_main:context_changed:1774238522312:8f6883",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "10% → 14%",
+          "at": "2026-03-23T04:02:02.312Z"
+        }
+      ]
+    },
+    {
+      "id": "run_builder",
+      "agentId": "builder",
+      "agentName": "执行者",
+      "agentRole": "开发 / 落地",
+      "status": "bootstrapping",
+      "statusLabel": "启动中",
+      "riskLabel": "启动观察",
+      "summary": "刚进入运行过程，轨迹还在形成。",
+      "model": null,
+      "totalTokens": 0,
+      "contextPercent": null,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "bootstrapPending": true,
+      "latestSession": null,
+      "createdAt": "2026-03-20T11:36:36.500Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "profile": {
+        "avatar": "🔧",
+        "style": "实现层 / 结果生产",
+        "mission": "把已经确认的方向落成页面、代码和交付结果。"
+      },
+      "events": [
+        {
+          "id": "run_builder:session:78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T10:28:25.813Z",
+          "sessionId": "78a01f64-2fed-4235-baa1-43fe56b38e7b"
+        },
+        {
+          "id": "run_builder:session_changed:1774175044225:f69c99",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "78a01f64-2fed-4235-baa1-43fe56b38e7b"
+        },
+        {
+          "id": "run_builder:model_changed:1774175044225:e79ebd",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T10:24:04.225Z"
+        },
+        {
+          "id": "run_builder:session:ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T07:07:42.714Z",
+          "sessionId": "ccb58e0e-eaa6-4963-b44c-e8397b40013e"
+        },
+        {
+          "id": "run_builder:session_changed:1774162882474:9d5277",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": "ccb58e0e-eaa6-4963-b44c-e8397b40013e"
+        },
+        {
+          "id": "run_builder:model_changed:1774162882474:98865c",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T07:01:22.474Z"
+        },
+        {
+          "id": "run_builder:session:94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:59:58.702Z",
+          "sessionId": "94a593c9-8a96-4cc5-82ff-8c77b47b553a"
+        },
+        {
+          "id": "run_builder:session_changed:1774162595293:b199ea",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "94a593c9-8a96-4cc5-82ff-8c77b47b553a"
+        },
+        {
+          "id": "run_builder:model_changed:1774162595293:dd565c",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:56:35.293Z"
+        },
+        {
+          "id": "run_builder:session:0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:22:22.751Z",
+          "sessionId": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37"
+        },
+        {
+          "id": "run_builder:session_changed:1774160374807:7a06a1",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "at": "2026-03-22T06:19:34.807Z",
+          "sessionId": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37"
+        },
+        {
+          "id": "run_builder:model_changed:1774160374807:96dcf5",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:19:34.807Z"
+        },
+        {
+          "id": "run_builder:run_created:1774006596500:af6ba3",
+          "type": "run_created",
+          "title": "运行单元已建立",
+          "detail": "启动中 · 刚进入运行过程，轨迹还在形成。",
+          "at": "2026-03-20T11:36:36.500Z"
+        },
+        {
+          "id": "run_builder:risk_snapshot:1774006596500:e13cf3",
+          "type": "risk_snapshot",
+          "title": "初始风险快照",
+          "detail": "启动观察",
+          "at": "2026-03-20T11:36:36.500Z"
+        }
+      ]
+    },
+    {
+      "id": "run_learner",
+      "agentId": "learner",
+      "agentName": "learner",
+      "agentRole": "Agent",
+      "status": "bootstrapping",
+      "statusLabel": "启动中",
+      "riskLabel": "启动观察",
+      "summary": "刚进入运行过程，轨迹还在形成。",
+      "model": null,
+      "totalTokens": 0,
+      "contextPercent": null,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "bootstrapPending": true,
+      "latestSession": null,
+      "createdAt": "2026-03-22T06:01:19.761Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "profile": {
+        "avatar": "🤖",
+        "style": "通用角色",
+        "mission": "承担当前智能体任务。"
+      },
+      "events": [
+        {
+          "id": "run_learner:run_created:1774159279761:0d4bf2",
+          "type": "run_created",
+          "title": "运行单元已建立",
+          "detail": "启动中 · 刚进入运行过程，轨迹还在形成。",
+          "at": "2026-03-22T06:01:19.761Z"
+        },
+        {
+          "id": "run_learner:risk_snapshot:1774159279761:d3fe31",
+          "type": "risk_snapshot",
+          "title": "初始风险快照",
+          "detail": "启动观察",
+          "at": "2026-03-22T06:01:19.761Z"
+        }
+      ]
+    },
+    {
+      "id": "run_planner",
+      "agentId": "planner",
+      "agentName": "规划师",
+      "agentRole": "方案 / 拆解",
+      "status": "bootstrapping",
+      "statusLabel": "启动中",
+      "riskLabel": "启动观察",
+      "summary": "刚进入运行过程，轨迹还在形成。",
+      "model": null,
+      "totalTokens": 0,
+      "contextPercent": null,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "bootstrapPending": true,
+      "latestSession": null,
+      "createdAt": "2026-03-20T11:36:36.500Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "profile": {
+        "avatar": "📋",
+        "style": "策略层 / 结构设计",
+        "mission": "负责把模糊目标拆成明确结构与执行路径。"
+      },
+      "events": [
+        {
+          "id": "run_planner:session:f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T10:28:18.862Z",
+          "sessionId": "f9fbf069-da00-4daa-9b6e-7aab0d040622"
+        },
+        {
+          "id": "run_planner:session_changed:1774175044225:8fe668",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "f9fbf069-da00-4daa-9b6e-7aab0d040622"
+        },
+        {
+          "id": "run_planner:model_changed:1774175044225:abbaa6",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T10:24:04.225Z"
+        },
+        {
+          "id": "run_planner:session:12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T07:03:18.791Z",
+          "sessionId": "12cf785b-0b38-4294-b47c-455ed28e09ed"
+        },
+        {
+          "id": "run_planner:session_changed:1774162882474:d60752",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": "12cf785b-0b38-4294-b47c-455ed28e09ed"
+        },
+        {
+          "id": "run_planner:model_changed:1774162882474:3417d6",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T07:01:22.474Z"
+        },
+        {
+          "id": "run_planner:session:073666be-9db5-496c-9316-0fb5132ccbdc",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:58:01.905Z",
+          "sessionId": "073666be-9db5-496c-9316-0fb5132ccbdc"
+        },
+        {
+          "id": "run_planner:session_changed:1774162595293:83cbda",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "073666be-9db5-496c-9316-0fb5132ccbdc",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "073666be-9db5-496c-9316-0fb5132ccbdc"
+        },
+        {
+          "id": "run_planner:model_changed:1774162595293:db23c0",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:56:35.293Z"
+        },
+        {
+          "id": "run_planner:session:68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:23:57.901Z",
+          "sessionId": "68effd14-5247-401f-92a8-85cd57c9f3ae"
+        },
+        {
+          "id": "run_planner:session_changed:1774160374807:1d3e6f",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "at": "2026-03-22T06:19:34.807Z",
+          "sessionId": "68effd14-5247-401f-92a8-85cd57c9f3ae"
+        },
+        {
+          "id": "run_planner:model_changed:1774160374807:7aa474",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:19:34.807Z"
+        },
+        {
+          "id": "run_planner:session:1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "type": "session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:02:06.712Z",
+          "sessionId": "1f914361-aec8-4807-b0f1-a94371cdb2e5"
+        },
+        {
+          "id": "run_planner:session_changed:1774159279761:6811ff",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "at": "2026-03-22T06:01:19.761Z",
+          "sessionId": "1f914361-aec8-4807-b0f1-a94371cdb2e5"
+        },
+        {
+          "id": "run_planner:model_changed:1774159279761:82a092",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:01:19.761Z"
+        },
+        {
+          "id": "run_planner:run_created:1774006596500:1f3a2a",
+          "type": "run_created",
+          "title": "运行单元已建立",
+          "detail": "启动中 · 刚进入运行过程，轨迹还在形成。",
+          "at": "2026-03-20T11:36:36.500Z"
+        },
+        {
+          "id": "run_planner:risk_snapshot:1774006596500:e2b074",
+          "type": "risk_snapshot",
+          "title": "初始风险快照",
+          "detail": "启动观察",
+          "at": "2026-03-20T11:36:36.500Z"
+        }
+      ]
+    },
+    {
+      "id": "run_reviewer",
+      "agentId": "reviewer",
+      "agentName": "审查",
+      "agentRole": "检查 / 复核",
+      "status": "idle",
+      "statusLabel": "轻载 / 待命",
+      "riskLabel": "长时静默",
+      "summary": "当前轨迹较弱，更像待命或阶段性收尾。",
+      "model": null,
+      "totalTokens": 0,
+      "contextPercent": null,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "bootstrapPending": false,
+      "latestSession": null,
+      "createdAt": "2026-03-20T11:36:36.500Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "profile": {
+        "avatar": "🔍",
+        "style": "复核层 / 质量守门",
+        "mission": "检查交互、风险和方向偏移，避免页面越做越重。"
+      },
+      "events": [
+        {
+          "id": "run_reviewer:status_changed:1774175148332:d0bfc3",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "run_reviewer:risk_changed:1774175148332:42c868",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 长时静默",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "run_reviewer:status_changed:1774175133399:1c56f5",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "轻载 / 待命 → 深度运行中",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "run_reviewer:context_changed:1774175133399:ac3184",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 24%",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "run_reviewer:session:c0842f47-9ff5-4940-b94a-bc8c19626287",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 47443 资源 · 上下文 24%",
+          "at": "2026-03-22T10:25:22.022Z",
+          "sessionId": "c0842f47-9ff5-4940-b94a-bc8c19626287"
+        },
+        {
+          "id": "run_reviewer:risk_changed:1774175044225:470462",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "长时静默 → 稳定运行",
+          "at": "2026-03-22T10:24:04.225Z"
+        },
+        {
+          "id": "run_reviewer:session_changed:1774175044225:127eb4",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "c0842f47-9ff5-4940-b94a-bc8c19626287",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "c0842f47-9ff5-4940-b94a-bc8c19626287"
+        },
+        {
+          "id": "run_reviewer:model_changed:1774175044225:027fe6",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → claude-opus-4-6",
+          "at": "2026-03-22T10:24:04.225Z"
+        },
+        {
+          "id": "run_reviewer:status_changed:1774163011551:9c4849",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-22T07:03:31.551Z"
+        },
+        {
+          "id": "run_reviewer:risk_changed:1774163011551:8b4339",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 长时静默",
+          "at": "2026-03-22T07:03:31.551Z"
+        },
+        {
+          "id": "run_reviewer:status_changed:1774162996652:6fd6b1",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "轻载 / 待命 → 深度运行中",
+          "at": "2026-03-22T07:03:16.653Z"
+        },
+        {
+          "id": "run_reviewer:context_changed:1774162996653:c586c3",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 31%",
+          "at": "2026-03-22T07:03:16.653Z"
+        },
+        {
+          "id": "run_reviewer:session:7a277462-5690-4526-a729-38dd0a4ff6b1",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 61931 资源 · 上下文 31%",
+          "at": "2026-03-22T07:03:14.119Z",
+          "sessionId": "7a277462-5690-4526-a729-38dd0a4ff6b1"
+        },
+        {
+          "id": "run_reviewer:risk_changed:1774162882474:cc9b61",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "长时静默 → 稳定运行",
+          "at": "2026-03-22T07:01:22.474Z"
+        },
+        {
+          "id": "run_reviewer:session_changed:1774162882474:0ac6df",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "7a277462-5690-4526-a729-38dd0a4ff6b1",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": "7a277462-5690-4526-a729-38dd0a4ff6b1"
+        },
+        {
+          "id": "run_reviewer:model_changed:1774162882474:443d7f",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → claude-opus-4-6",
+          "at": "2026-03-22T07:01:22.474Z"
+        },
+        {
+          "id": "run_reviewer:session:5afa1311-9aed-4c8d-8f7f-7278d5d3b5ca",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 63773 资源 · 上下文 32%",
+          "at": "2026-03-22T07:00:17.809Z",
+          "sessionId": "5afa1311-9aed-4c8d-8f7f-7278d5d3b5ca"
+        },
+        {
+          "id": "run_reviewer:context_changed:1774162820231:c991cb",
+          "type": "context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 32%",
+          "at": "2026-03-22T07:00:20.231Z"
+        },
+        {
+          "id": "run_reviewer:risk_changed:1774162595293:34bded",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "长时静默 → 稳定运行",
+          "at": "2026-03-22T06:56:35.293Z"
+        },
+        {
+          "id": "run_reviewer:session_changed:1774162595293:a3ae7b",
+          "type": "session_changed",
+          "title": "最新会话已切换",
+          "detail": "5afa1311-9aed-4c8d-8f7f-7278d5d3b5ca",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "5afa1311-9aed-4c8d-8f7f-7278d5d3b5ca"
+        },
+        {
+          "id": "run_reviewer:model_changed:1774162595293:b98f8e",
+          "type": "model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → claude-opus-4-6",
+          "at": "2026-03-22T06:56:35.293Z"
+        },
+        {
+          "id": "run_reviewer:status_changed:1774160600110:a034ea",
+          "type": "status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-22T06:23:20.110Z"
+        },
+        {
+          "id": "run_reviewer:risk_changed:1774160600110:1d0f28",
+          "type": "risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 长时静默",
+          "at": "2026-03-22T06:23:20.110Z"
+        },
+        {
+          "id": "run_reviewer:session:6b11718c-708a-4416-9277-52e7b1a16223",
+          "type": "session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 83370 资源 · 上下文 42%",
+          "at": "2026-03-22T06:22:51.298Z",
+          "sessionId": "6b11718c-708a-4416-9277-52e7b1a16223"
+        }
+      ]
+    }
+  ]
+}

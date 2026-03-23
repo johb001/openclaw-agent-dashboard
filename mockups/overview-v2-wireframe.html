@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard v2 Wireframe</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:#07111d;color:#eaf3ff}
+    .wrap{width:1440px;margin:0 auto;padding:28px 24px 40px}
+    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .brand{font-size:28px;font-weight:800}.sub{color:#8ea7c4;font-size:14px;margin-top:6px}
+    .status{display:flex;gap:12px}.pill{padding:10px 14px;border-radius:999px;background:#10253e;border:1px solid #23496f;color:#8fd8ff;font-size:13px}
+    .hero{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:16px;margin-bottom:18px}
+    .card{background:linear-gradient(180deg,#0c1d31,#091726);border:1px solid #18334f;border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+    .card h3{margin:0 0 10px;font-size:13px;color:#87a4c7;font-weight:600}.big{font-size:28px;font-weight:800;line-height:1.25}.muted{color:#8ea7c4;font-size:13px;line-height:1.6}
+    .main{display:grid;grid-template-columns:1.35fr .95fr;gap:18px;margin-bottom:18px}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.section-title strong{font-size:20px}.link{font-size:13px;color:#63d3ff}
+    .agent-list,.task-list,.risk-list{display:flex;flex-direction:column;gap:12px}
+    .row{display:grid;grid-template-columns:120px 120px 1fr 120px 110px;gap:12px;align-items:center;padding:14px 16px;border-radius:16px;background:#0a1829;border:1px solid #163049}
+    .row .name{font-weight:700}.busy{color:#66d4ff}.ok{color:#63efb0}.warn{color:#ffbe5c}.danger{color:#ff6e86}.btn{padding:8px 12px;border-radius:12px;border:1px solid #1d4669;background:#0d2238;color:#b6e9ff;text-align:center;font-size:12px}
+    .task{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 16px;border-radius:16px;background:#0a1829;border:1px solid #163049}
+    .task strong{display:block;margin-bottom:6px}.task small{color:#8ea7c4}
+    .bottom{display:grid;grid-template-columns:1fr;gap:18px}
+    .riskband{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .riskitem{padding:14px 16px;border-radius:16px;background:#0a1829;border:1px solid #163049}
+    .riskitem strong{display:block;margin-bottom:8px}.hint{font-size:12px;color:#7f9bbb}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="brand">Agent Dashboard v2</div>
+        <div class="sub">总览页 = 全局驾驶舱 · 先给结论，再看详情</div>
+      </div>
+      <div class="status">
+        <div class="pill">平台状态：正常</div>
+        <div class="pill">主责智能体：龙龙</div>
+        <div class="pill">最高风险：高上下文占用</div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="card">
+        <h3>当前最重要结论</h3>
+        <div class="big">龙龙正在主导当前任务推进</div>
+        <div class="muted">整体可用，但有 1 个高风险运行信号需要盯住。</div>
+      </div>
+      <div class="card"><h3>整体状态</h3><div class="big">正常</div><div class="muted">接口在线 / 数据可读</div></div>
+      <div class="card"><h3>当前关键任务</h3><div class="big">任务推进</div><div class="muted">目标统筹处于主链路</div></div>
+      <div class="card"><h3>最高风险</h3><div class="big danger">高占用</div><div class="muted">建议查看运行详情</div></div>
+    </div>
+
+    <div class="main">
+      <div class="card">
+        <div class="section-title"><strong>智能体状态总表</strong><span class="link">查看全部智能体详情</span></div>
+        <div class="agent-list">
+          <div class="row"><div class="name">龙龙</div><div class="busy">忙</div><div>正在统筹当前任务</div><div class="ok">风险：无</div><div class="btn">查看详情</div></div>
+          <div class="row"><div class="name">规划师</div><div class="warn">启动中</div><div>等待接入任务链路</div><div class="warn">风险：启动中</div><div class="btn">查看详情</div></div>
+          <div class="row"><div class="name">执行者</div><div class="danger">卡住</div><div>最近没有形成有效推进</div><div class="danger">风险：长时静默</div><div class="btn">查看详情</div></div>
+          <div class="row"><div class="name">审查</div><div class="ok">在线</div><div>处于待命观察位</div><div class="ok">风险：无</div><div class="btn">查看详情</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title"><strong>重点任务</strong><span class="link">查看全部任务</span></div>
+        <div class="task-list">
+          <div class="task"><div><strong>当前最重要任务</strong><small>目标统筹 · 龙龙 · 正在推进</small></div><div class="btn">查看详情</div></div>
+          <div class="task"><div><strong>当前最卡任务</strong><small>页面落地 · 执行者 · 阻塞中</small></div><div class="btn">查看详情</div></div>
+          <div class="task"><div><strong>最近推进任务</strong><small>回归复核 · 审查 · 最近有动作</small></div><div class="btn">查看详情</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="card">
+        <div class="section-title"><strong>运行风险带</strong><span class="link">查看运行详情</span></div>
+        <div class="riskband">
+          <div class="riskitem"><strong class="danger">高上下文占用</strong><div class="hint">龙龙 · 需要关注可持续性</div></div>
+          <div class="riskitem"><strong class="warn">启动中</strong><div class="hint">规划师 · 尚未稳定</div></div>
+          <div class="riskitem"><strong class="danger">长时静默</strong><div class="hint">执行者 · 可能卡住</div></div>
+          <div class="riskitem"><strong class="ok">接口正常</strong><div class="hint">当前服务在线</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

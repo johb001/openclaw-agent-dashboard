@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Dashboard Mockup V2</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --bg-soft: #111a2e;
+      --panel: rgba(18, 27, 45, 0.92);
+      --panel-2: rgba(14, 22, 36, 0.88);
+      --border: rgba(148, 163, 184, 0.14);
+      --text: #eef4ff;
+      --muted: #93a4bf;
+      --blue: #60a5fa;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --purple: #a78bfa;
+      --shadow: 0 20px 48px rgba(0,0,0,.28);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(124,58,237,.14), transparent 28%),
+        var(--bg);
+    }
+    .page { max-width: 1520px; margin: 0 auto; padding: 24px; }
+    .card { border: 1px solid var(--border); border-radius: 24px; background: linear-gradient(180deg, rgba(18,27,45,.95), rgba(11,17,32,.94)); box-shadow: var(--shadow); }
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .hero { padding: 24px; }
+    .hero-row { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+    .logo {
+      width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(96,165,250,.18), rgba(167,139,250,.22)); font-size: 28px;
+    }
+    .eyebrow { color: #7dd3fc; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 6px 0 8px; font-size: 34px; line-height: 1.08; }
+    .sub { color: var(--muted); font-size: 14px; }
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tab { padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: rgba(18,30,48,.72); color: #d4e0f5; font-size: 14px; }
+    .tab.active { background: linear-gradient(135deg, rgba(37,99,235,.38), rgba(96,165,250,.18)); border-color: rgba(96,165,250,.34); color: white; }
+    .top-side { padding: 16px; display: grid; gap: 12px; }
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mini { border: 1px solid var(--border); border-radius: 18px; background: rgba(18,28,45,.82); padding: 14px 16px; }
+    .mini-label { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .pill.green { color: #86efac; background: rgba(52,211,153,.14); }
+    .pill.blue { color: #93c5fd; background: rgba(96,165,250,.14); }
+    .pill.yellow { color: #fde68a; background: rgba(251,191,36,.14); }
+    .focus-line { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .agent { display: flex; align-items: center; gap: 12px; }
+    .agent-avatar { width: 40px; height: 40px; border-radius: 14px; display: grid; place-items: center; background: rgba(124,58,237,.18); font-size: 22px; }
+    .agent strong { display: block; }
+    .agent span { color: var(--muted); font-size: 12px; }
+    .mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .mini-stat { border: 1px solid var(--border); border-radius: 14px; background: rgba(14,22,36,.76); padding: 10px 12px; }
+    .mini-stat span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .mini-stat strong { font-size: 15px; }
+    .strip { border: 1px solid var(--border); border-radius: 18px; background: rgba(17,26,42,.88); padding: 14px 16px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+    .strip-item span { display: block; color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+    .strip-item strong { font-size: 14px; }
+    .refresh { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .refresh button { border: 0; border-radius: 12px; padding: 10px 14px; background: linear-gradient(135deg,#2563eb,#1d4ed8); color: white; }
+    .refresh small { color: var(--muted); }
+
+    .summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 18px; }
+    .summary-card { padding: 18px; }
+    .summary-card span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+    .summary-card strong { display: block; font-size: 30px; line-height: 1.05; margin-bottom: 8px; }
+    .summary-card small { color: var(--muted); font-size: 13px; }
+
+    .layout { display: grid; grid-template-columns: 250px 1fr; gap: 18px; }
+    .sidebar { padding: 16px; }
+    .section-title { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+    .nav { display: grid; gap: 6px; margin-bottom: 18px; }
+    .nav-item { display:flex; justify-content:space-between; align-items:center; gap:12px; border-radius:14px; padding:11px 12px; color: var(--text); background: transparent; }
+    .nav-item.active { background: rgba(30,41,59,.94); border: 1px solid rgba(96,165,250,.18); }
+    .nav-left { display:flex; align-items:center; gap:10px; }
+    .dot { width: 9px; height: 9px; border-radius: 999px; }
+    .dot.green { background: var(--green); }
+    .dot.blue { background: var(--blue); }
+    .content { display: grid; gap: 18px; }
+    .focus-panel { padding: 18px; }
+    .panel-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; margin-bottom:14px; }
+    .panel-head h2, .panel-head h3 { margin:0 0 6px; }
+    .panel-head p { margin:0; color: var(--muted); font-size: 13px; }
+    .status-pill { padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; background: rgba(52,211,153,.14); color:#86efac; }
+    .focus-body { display:grid; grid-template-columns: 1fr 460px; gap: 18px; }
+    .focus-main { display:flex; gap:14px; align-items:center; }
+    .focus-big { width: 56px; height: 56px; border-radius: 18px; display:grid; place-items:center; background: rgba(124,58,237,.18); font-size: 28px; }
+    .focus-main strong { display:block; font-size: 22px; margin-bottom: 6px; }
+    .focus-main span { color: var(--muted); font-size: 14px; }
+    .focus-main small { display:block; margin-top:8px; color: var(--muted); font-size: 13px; }
+    .focus-kpis { display:grid; grid-template-columns: repeat(2,1fr); gap:10px; }
+    .kpi { border:1px solid var(--border); border-radius:14px; background: rgba(14,22,36,.8); padding:12px 14px; }
+    .kpi span { display:block; color: var(--muted); font-size:12px; margin-bottom:7px; }
+    .kpi strong { font-size:16px; }
+
+    .two-col { display:grid; grid-template-columns: repeat(2,1fr); gap:18px; }
+    .panel { padding: 18px; }
+    .feed, .detail, .bars { display:grid; gap:10px; }
+    .feed-item, .detail-row, .bar-box { border:1px solid var(--border); border-radius:14px; background: rgba(14,22,36,.82); }
+    .feed-item { padding:14px; }
+    .feed-top { display:flex; justify-content:space-between; gap:12px; margin-bottom:8px; }
+    .feed-top span, .feed-sub, .detail-row span { color: var(--muted); font-size: 12px; }
+    .feed-main { font-weight: 700; margin-bottom: 4px; }
+    .detail-row { display:flex; justify-content:space-between; gap:12px; padding: 13px 14px; }
+    .detail-row strong { text-align:right; }
+    .bar-row-top { display:flex; justify-content:space-between; gap:12px; margin-bottom:6px; }
+    .bar-track { height:8px; border-radius:999px; background: rgba(148,163,184,.12); overflow:hidden; }
+    .bar-fill { height:100%; border-radius:999px; background: linear-gradient(90deg,#60a5fa,#a78bfa); }
+    .config-note { padding:14px; border-radius:14px; background: rgba(7,12,22,.78); color:#dbe8fb; font-size:12px; line-height:1.65; }
+
+    @media (max-width: 1180px) {
+      .topbar, .summary, .layout, .focus-body, .two-col, .mini-grid, .strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="card hero">
+        <div class="hero-row">
+          <div class="logo">🦞</div>
+          <div>
+            <div class="eyebrow">Agent Dashboard</div>
+            <h1>多智能体运行总览</h1>
+            <div class="sub">参考控制中心节奏，但保持轻量、顺眼、克制。</div>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tab active">总览</div>
+          <div class="tab">Agent</div>
+          <div class="tab">会话</div>
+          <div class="tab">使用情况</div>
+        </div>
+      </div>
+      <div class="card top-side">
+        <div class="mini-grid">
+          <div class="mini">
+            <div class="mini-label">系统状态</div>
+            <div class="pill-row">
+              <div class="pill green">在线 4 / 4</div>
+              <div class="pill blue">同步正常</div>
+            </div>
+            <div style="margin-top:10px;color:var(--muted);font-size:12px;">最后更新 23:58</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">当前焦点</div>
+            <div class="focus-line">
+              <div class="agent">
+                <div class="agent-avatar">🐉</div>
+                <div><strong>龙龙</strong><span>主控 Agent</span></div>
+              </div>
+              <div class="pill green">活跃</div>
+            </div>
+            <div class="mini-stats">
+              <div class="mini-stat"><span>模型</span><strong>Claude Opus 4.6</strong></div>
+              <div class="mini-stat"><span>会话</span><strong>26</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="strip">
+          <div class="strip-item"><span>当前 Agent</span><strong>🐉 龙龙</strong></div>
+          <div class="strip-item"><span>默认模型</span><strong>Claude Opus 4.6</strong></div>
+          <div class="strip-item"><span>在线数</span><strong>4 / 4</strong></div>
+          <div class="strip-item"><span>当前状态</span><strong>活跃</strong></div>
+        </div>
+        <div class="refresh"><button>刷新</button><small>已接近控制中心风格，但主区更轻。</small></div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="card summary-card"><span>Agent 总数</span><strong>4</strong><small>当前配置中的智能体</small></div>
+      <div class="card summary-card"><span>在线数</span><strong>4</strong><small>最近 1 小时活跃</small></div>
+      <div class="card summary-card"><span>会话数</span><strong>26</strong><small>当前可见会话</small></div>
+      <div class="card summary-card"><span>默认模型</span><strong>Opus</strong><small>全局主模型</small></div>
+    </div>
+
+    <div class="layout">
+      <div class="card sidebar">
+        <div class="section-title">视图</div>
+        <div class="nav">
+          <div class="nav-item active"><div class="nav-left">📊 <span>总览</span></div></div>
+          <div class="nav-item"><div class="nav-left">🤖 <span>Agent</span></div></div>
+          <div class="nav-item"><div class="nav-left">💬 <span>会话</span></div></div>
+          <div class="nav-item"><div class="nav-left">📈 <span>使用情况</span></div></div>
+        </div>
+        <div class="section-title">智能体</div>
+        <div class="nav">
+          <div class="nav-item active"><div class="nav-left">🐉 <span>龙龙</span></div><div class="dot green"></div></div>
+          <div class="nav-item"><div class="nav-left">📋 <span>规划师</span></div><div class="dot blue"></div></div>
+          <div class="nav-item"><div class="nav-left">🔧 <span>执行者</span></div><div class="dot blue"></div></div>
+          <div class="nav-item"><div class="nav-left">🔍 <span>质检员</span></div><div class="dot blue"></div></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="card focus-panel">
+          <div class="panel-head">
+            <div>
+              <h2>当前焦点</h2>
+              <p>先把当前 Agent、会话和状态看清楚。</p>
+            </div>
+            <div class="status-pill">活跃</div>
+          </div>
+          <div class="focus-body">
+            <div class="focus-main">
+              <div class="focus-big">🐉</div>
+              <div>
+                <strong>龙龙</strong>
+                <span>主控 Agent · 当前负责用户沟通、调度与汇总</span>
+                <small>当前会话：agent:main:feishu:direct:...</small>
+              </div>
+            </div>
+            <div class="focus-kpis">
+              <div class="kpi"><span>当前模型</span><strong>Claude Opus 4.6</strong></div>
+              <div class="kpi"><span>最近活跃</span><strong>刚刚</strong></div>
+              <div class="kpi"><span>会话数</span><strong>26</strong></div>
+              <div class="kpi"><span>Token</span><strong>242,559</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card panel">
+            <div class="panel-head"><div><h3>最近动态</h3><p>最近发生了什么，一眼看清。</p></div></div>
+            <div class="feed">
+              <div class="feed-item"><div class="feed-top"><strong>龙龙</strong><span>2 分钟前</span></div><div class="feed-main">Claude Opus 4.6</div><div class="feed-sub">174,442 tokens</div></div>
+              <div class="feed-item"><div class="feed-top"><strong>龙龙</strong><span>41 分钟前</span></div><div class="feed-main">MiniMax-M2.5</div><div class="feed-sub">68,117 tokens</div></div>
+              <div class="feed-item"><div class="feed-top"><strong>规划师</strong><span>1 小时前</span></div><div class="feed-main">GPT-5.4</div><div class="feed-sub">等待下一轮任务</div></div>
+            </div>
+          </div>
+          <div class="card panel">
+            <div class="panel-head"><div><h3>Agent 详情</h3><p>查看当前选中 Agent 的细节。</p></div></div>
+            <div class="detail">
+              <div class="detail-row"><span>名称</span><strong>龙龙</strong></div>
+              <div class="detail-row"><span>角色</span><strong>主控 Agent</strong></div>
+              <div class="detail-row"><span>模型</span><strong>Claude Opus 4.6</strong></div>
+              <div class="detail-row"><span>状态</span><strong>活跃</strong></div>
+              <div class="detail-row"><span>最近活跃</span><strong>刚刚</strong></div>
+              <div class="detail-row"><span>Session</span><strong>agent:main:feishu:direct...</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card panel">
+            <div class="panel-head"><div><h3>使用情况</h3><p>先用轻量图形表达，不上重图表。</p></div></div>
+            <div class="bars">
+              <div class="bar-box" style="padding:14px;"><div class="bar-row-top"><span>Claude Opus 4.6</span><strong>174,442</strong></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+              <div class="bar-box" style="padding:14px;"><div class="bar-row-top"><span>MiniMax-M2.5</span><strong>68,117</strong></div><div class="bar-track"><div class="bar-fill" style="width:39%"></div></div></div>
+              <div class="bar-box" style="padding:14px;"><div class="bar-row-top"><span>GPT-5.4</span><strong>12,330</strong></div><div class="bar-track"><div class="bar-fill" style="width:8%"></div></div></div>
+            </div>
+          </div>
+          <div class="card panel">
+            <div class="panel-head"><div><h3>配置摘要</h3><p>确认当前系统基线。</p></div></div>
+            <div class="detail">
+              <div class="detail-row"><span>默认模型</span><strong>Claude Opus 4.6</strong></div>
+              <div class="detail-row"><span>主控 Agent</span><strong>龙龙</strong></div>
+              <div class="detail-row"><span>Base URL</span><strong>111.229.194.14:6543</strong></div>
+              <div class="detail-row"><span>自动刷新</span><strong>15 秒</strong></div>
+            </div>
+            <div class="config-note">这一版借鉴了 control center 的搭配方式：摘要更清楚、焦点区更稳、主区填满但不重，先解决“可看”和“可判断”，再补更复杂的交互。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

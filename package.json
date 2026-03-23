@@ -8,7 +8,9 @@
     "dev:api": "node server.js",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:latest": "bash ./start-prod.sh",
+    "restart:latest": "bash ./stop.sh && bash ./start-prod.sh"
   },
   "dependencies": {
     "http-proxy": "^1.18.1",

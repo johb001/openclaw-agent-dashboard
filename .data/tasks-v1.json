@@ -1,0 +1,1285 @@
+{
+  "version": 2,
+  "updatedAt": "2026-03-23T04:42:17.946Z",
+  "tasks": [
+    {
+      "id": "task_manual_81b1f8079ee0",
+      "version": 2,
+      "title": "PATCH校验任务",
+      "type": "general",
+      "source": "manual",
+      "ownerAgentId": "main",
+      "ownerSessionId": null,
+      "status": "in_progress",
+      "waitingForUser": false,
+      "blocked": false,
+      "blockerType": null,
+      "blockerReason": "",
+      "priority": "P2",
+      "stage": "验证",
+      "summary": "恢复后的摘要",
+      "statusReason": "已恢复推进",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-22T06:23:27.771Z",
+      "updatedAt": "2026-03-22T06:57:33.153Z",
+      "events": [
+        {
+          "id": "task_manual_81b1f8079ee0:1774162653153:fbe17d",
+          "type": "summary_updated",
+          "title": "摘要已更新",
+          "detail": "恢复后的摘要",
+          "at": "2026-03-22T06:57:33.153Z"
+        },
+        {
+          "id": "task_manual_81b1f8079ee0:1774162653153:1273d0",
+          "type": "status_updated",
+          "title": "状态已更新",
+          "detail": "blocked → in_progress",
+          "at": "2026-03-22T06:57:33.153Z"
+        },
+        {
+          "id": "task_manual_81b1f8079ee0:1774162653153:7aed15",
+          "type": "status_reason_updated",
+          "title": "状态原因已更新",
+          "detail": "已恢复推进",
+          "at": "2026-03-22T06:57:33.153Z"
+        },
+        {
+          "id": "task_manual_81b1f8079ee0:1774162653151:91c1e4",
+          "type": "status_updated",
+          "title": "状态已更新",
+          "detail": "queued → blocked",
+          "at": "2026-03-22T06:57:33.151Z"
+        },
+        {
+          "id": "task_manual_81b1f8079ee0:1774160607771:61ee76",
+          "type": "task_created",
+          "title": "任务已创建",
+          "detail": "queued · 验证非法状态返回",
+          "at": "2026-03-22T06:23:27.771Z"
+        }
+      ],
+      "compatibility": {
+        "agentId": "main",
+        "sessionsCount": 0
+      }
+    },
+    {
+      "id": "task_manual_7038038a1e08",
+      "version": 2,
+      "title": "bad",
+      "type": "general",
+      "source": "manual",
+      "ownerAgentId": "main",
+      "ownerSessionId": null,
+      "status": "queued",
+      "waitingForUser": false,
+      "blocked": false,
+      "blockerType": null,
+      "blockerReason": "",
+      "priority": "P2",
+      "stage": "新建",
+      "summary": "等待补充任务摘要。",
+      "statusReason": "",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-22T06:23:27.761Z",
+      "updatedAt": "2026-03-22T06:23:27.761Z",
+      "events": [
+        {
+          "id": "task_manual_7038038a1e08:1774160607761:58eece",
+          "type": "task_created",
+          "title": "任务已创建",
+          "detail": "queued · 等待补充任务摘要。",
+          "at": "2026-03-22T06:23:27.761Z"
+        }
+      ],
+      "compatibility": {
+        "agentId": "main",
+        "sessionsCount": 0
+      }
+    },
+    {
+      "id": "task_manual_ffa7d24a153d",
+      "version": 2,
+      "title": "联调任务",
+      "type": "general",
+      "source": "manual",
+      "ownerAgentId": "main",
+      "ownerSessionId": null,
+      "status": "in_progress",
+      "waitingForUser": false,
+      "blocked": false,
+      "blockerType": null,
+      "blockerReason": "",
+      "priority": "P1",
+      "stage": "联调中",
+      "summary": "开始继续联调验证",
+      "statusReason": "已收到补充信息，继续推进",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-22T06:22:26.847Z",
+      "updatedAt": "2026-03-22T06:22:26.944Z",
+      "events": [
+        {
+          "id": "task_manual_ffa7d24a153d:1774160546927:05b7d8",
+          "type": "summary_updated",
+          "title": "摘要已更新",
+          "detail": "开始继续联调验证",
+          "at": "2026-03-22T06:22:26.927Z"
+        },
+        {
+          "id": "task_manual_ffa7d24a153d:1774160546927:fb93dc",
+          "type": "status_updated",
+          "title": "状态已更新",
+          "detail": "blocked → in_progress",
+          "at": "2026-03-22T06:22:26.927Z"
+        },
+        {
+          "id": "task_manual_ffa7d24a153d:1774160546927:721338",
+          "type": "status_reason_updated",
+          "title": "状态原因已更新",
+          "detail": "已收到补充信息，继续推进",
+          "at": "2026-03-22T06:22:26.927Z"
+        },
+        {
+          "id": "task_manual_ffa7d24a153d:1774160546848:b51a9d",
+          "type": "task_created",
+          "title": "任务已创建",
+          "detail": "blocked · 给前端直连接口验证",
+          "at": "2026-03-22T06:22:26.848Z"
+        }
+      ],
+      "compatibility": {
+        "agentId": "main",
+        "sessionsCount": 0
+      }
+    },
+    {
+      "id": "task_manual_5dd0bca6da97",
+      "version": 2,
+      "title": "联调阻塞测试",
+      "type": "general",
+      "source": "manual",
+      "ownerAgentId": "main",
+      "ownerSessionId": null,
+      "status": "in_progress",
+      "waitingForUser": false,
+      "blocked": false,
+      "blockerType": null,
+      "blockerReason": "",
+      "priority": "P2",
+      "stage": "新建",
+      "summary": "已收到补充信息，继续推进",
+      "statusReason": "",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-22T06:01:12.291Z",
+      "updatedAt": "2026-03-22T06:01:12.364Z",
+      "events": [
+        {
+          "id": "task_manual_5dd0bca6da97:1774159272364:f5114f",
+          "type": "summary_updated",
+          "title": "摘要已更新",
+          "detail": "已收到补充信息，继续推进",
+          "at": "2026-03-22T06:01:12.364Z"
+        },
+        {
+          "id": "task_manual_5dd0bca6da97:1774159272364:6bd921",
+          "type": "status_updated",
+          "title": "状态已更新",
+          "detail": "blocked → in_progress",
+          "at": "2026-03-22T06:01:12.364Z"
+        },
+        {
+          "id": "task_manual_5dd0bca6da97:1774159272292:0d149e",
+          "type": "task_created",
+          "title": "任务已创建",
+          "detail": "blocked · 等待用户确认接口字段",
+          "at": "2026-03-22T06:01:12.292Z"
+        }
+      ],
+      "compatibility": {
+        "agentId": "main",
+        "sessionsCount": 0
+      }
+    },
+    {
+      "id": "task_manual_0ca71a53001c",
+      "version": 2,
+      "title": "1",
+      "type": "general",
+      "source": "manual",
+      "ownerAgentId": "main",
+      "ownerSessionId": null,
+      "status": "queued",
+      "priority": "P2",
+      "stage": "新建",
+      "summary": "给我查今日黄金价格",
+      "statusReason": "",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-20T12:08:08.477Z",
+      "updatedAt": "2026-03-20T12:08:08.477Z",
+      "events": [
+        {
+          "id": "task_manual_0ca71a53001c:1774008488477:106851",
+          "type": "task_created",
+          "title": "任务已创建",
+          "detail": "queued · 给我查今日黄金价格",
+          "at": "2026-03-20T12:08:08.477Z"
+        }
+      ],
+      "compatibility": {
+        "agentId": "main",
+        "sessionsCount": 0
+      }
+    },
+    {
+      "id": "task_97d351d18c",
+      "version": 1,
+      "title": "目标统筹",
+      "type": "goal_orchestration",
+      "source": "derived_from_runtime",
+      "ownerAgentId": "main",
+      "ownerSessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+      "status": "running",
+      "waitingForUser": false,
+      "blocked": false,
+      "blockerType": null,
+      "blockerReason": "",
+      "statusReason": "当前已有连续执行痕迹，任务处于深度推进中。",
+      "priority": "P0",
+      "stage": "深度处理",
+      "summary": "正在推进当前任务，并持续留下运行结果。",
+      "latestContextPercent": 21,
+      "totalTokens": 250842,
+      "sessionCount": 10,
+      "lastActiveAgeMs": 77494,
+      "lastSession": {
+        "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+        "model": "claude-opus-4-6",
+        "totalTokens": 41056,
+        "percentUsed": 21,
+        "age": 77507
+      },
+      "createdAt": "2026-03-20T09:39:41.969Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "compatibility": {
+        "agentId": "main",
+        "sessionsCount": 10
+      },
+      "events": [
+        {
+          "id": "task_97d351d18c:run:run_main:session:b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "type": "run_session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 41056 资源 · 上下文 21%",
+          "at": "2026-03-23T04:41:00.439Z",
+          "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:session:03838719-b1cf-405c-b4d4-6ad34366e824",
+          "type": "run_session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 24632 资源 · 上下文 12%",
+          "at": "2026-03-23T04:34:35.790Z",
+          "sessionId": "03838719-b1cf-405c-b4d4-6ad34366e824",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:session:696c90b4-0a6c-4517-9bf2-a4891e9597a7",
+          "type": "run_session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 28127 资源 · 上下文 14%",
+          "at": "2026-03-23T04:00:19.945Z",
+          "sessionId": "696c90b4-0a6c-4517-9bf2-a4891e9597a7",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774240802747:b7ce89",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "19% → 21%",
+          "at": "2026-03-23T04:40:02.747Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774240667863:ce2fc6",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "12% → 19%",
+          "at": "2026-03-23T04:37:47.863Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:session_changed:1774240667863:027403",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "at": "2026-03-23T04:37:47.863Z",
+          "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:risk_changed:1774240473174:57f492",
+          "type": "run_risk_changed",
+          "title": "风险标签已变化",
+          "detail": "轻载运行 → 稳定运行",
+          "at": "2026-03-23T04:34:33.174Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774240473174:d10afc",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "18% → 12%",
+          "at": "2026-03-23T04:34:33.174Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:context_changed:1774240802747:45e6e9",
+          "type": "context_changed",
+          "title": "任务上下文占用变化",
+          "detail": "19% → 21%",
+          "at": "2026-03-23T04:40:02.747Z"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:session_changed:1774240473174:91a3fa",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "03838719-b1cf-405c-b4d4-6ad34366e824",
+          "at": "2026-03-23T04:34:33.174Z",
+          "sessionId": "03838719-b1cf-405c-b4d4-6ad34366e824",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_97d351d18c:context_changed:1774240667863:fa501f",
+          "type": "context_changed",
+          "title": "任务上下文占用变化",
+          "detail": "12% → 19%",
+          "at": "2026-03-23T04:37:47.864Z"
+        },
+        {
+          "id": "task_97d351d18c:session_changed:1774240667864:8f03d3",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "b7930dc6-cf30-4161-aa3d-6138d7922475",
+          "at": "2026-03-23T04:37:47.864Z",
+          "sessionId": "b7930dc6-cf30-4161-aa3d-6138d7922475"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:risk_changed:1774240352546:bd5f0a",
+          "type": "run_risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 轻载运行",
+          "at": "2026-03-23T04:32:32.546Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774239977395:5d117f",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "16% → 18%",
+          "at": "2026-03-23T04:26:17.395Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:context_changed:1774240473175:ae638a",
+          "type": "context_changed",
+          "title": "任务上下文占用变化",
+          "detail": "18% → 12%",
+          "at": "2026-03-23T04:34:33.175Z"
+        },
+        {
+          "id": "task_97d351d18c:session_changed:1774240473175:061c9a",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "03838719-b1cf-405c-b4d4-6ad34366e824",
+          "at": "2026-03-23T04:34:33.175Z",
+          "sessionId": "03838719-b1cf-405c-b4d4-6ad34366e824"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774239813306:4d4211",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "14% → 16%",
+          "at": "2026-03-23T04:23:33.306Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774239662772:fa6100",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "13% → 14%",
+          "at": "2026-03-23T04:21:02.772Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774239557705:e9bb5b",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "12% → 13%",
+          "at": "2026-03-23T04:19:17.705Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:status_changed:1774239347262:8d4bfd",
+          "type": "run_status_changed",
+          "title": "运行状态已变化",
+          "detail": "轻载 / 待命 → 深度运行中",
+          "at": "2026-03-23T04:15:47.262Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "status_changed"
+        },
+        {
+          "id": "task_97d351d18c:context_changed:1774239977395:9a49f1",
+          "type": "context_changed",
+          "title": "任务上下文占用变化",
+          "detail": "16% → 18%",
+          "at": "2026-03-23T04:26:17.395Z"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:context_changed:1774239347262:bdf172",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 12%",
+          "at": "2026-03-23T04:15:47.262Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_97d351d18c:context_changed:1774239813306:143f4b",
+          "type": "context_changed",
+          "title": "任务上下文占用变化",
+          "detail": "14% → 16%",
+          "at": "2026-03-23T04:23:33.306Z"
+        },
+        {
+          "id": "task_97d351d18c:run:run_main:status_changed:1774239258183:c23e62",
+          "type": "run_status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-23T04:14:18.183Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "status_changed"
+        }
+      ]
+    },
+    {
+      "id": "task_e1fb2f2f53",
+      "version": 1,
+      "title": "页面落地",
+      "type": "implementation",
+      "source": "derived_from_runtime",
+      "ownerAgentId": "builder",
+      "ownerSessionId": null,
+      "status": "preparing",
+      "waitingForUser": false,
+      "blocked": true,
+      "blockerType": null,
+      "blockerReason": "",
+      "statusReason": "智能体仍在启动，任务状态尚未稳定。",
+      "priority": "P1",
+      "stage": "初始化",
+      "summary": "正在建立运行上下文，等待任务状态稳定。",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-20T09:39:41.969Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "compatibility": {
+        "agentId": "builder",
+        "sessionsCount": 0
+      },
+      "events": [
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session:78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T10:28:25.813Z",
+          "sessionId": "78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session_changed:1774175044225:f69c99",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:model_changed:1774175044225:e79ebd",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session:ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T07:07:42.714Z",
+          "sessionId": "ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session_changed:1774162882474:9d5277",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": "ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:model_changed:1774162882474:98865c",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session:94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:59:58.702Z",
+          "sessionId": "94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session_changed:1774162595293:b199ea",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:session_changed:1774175044225:aef66b",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "78a01f64-2fed-4235-baa1-43fe56b38e7b",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "78a01f64-2fed-4235-baa1-43fe56b38e7b"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:model_changed:1774162595293:dd565c",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session:0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:22:22.751Z",
+          "sessionId": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:session_changed:1774160374807:7a06a1",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "at": "2026-03-22T06:19:34.807Z",
+          "sessionId": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:session_changed:1774162882475:ff604c",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "ccb58e0e-eaa6-4963-b44c-e8397b40013e",
+          "at": "2026-03-22T07:01:22.475Z",
+          "sessionId": "ccb58e0e-eaa6-4963-b44c-e8397b40013e"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:model_changed:1774160374807:96dcf5",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:19:34.807Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:run_created:1774006596500:af6ba3",
+          "type": "run_run_created",
+          "title": "运行单元已建立",
+          "detail": "启动中 · 刚进入运行过程，轨迹还在形成。",
+          "at": "2026-03-20T11:36:36.500Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "run_created"
+        },
+        {
+          "id": "task_e1fb2f2f53:run:run_builder:risk_snapshot:1774006596500:e13cf3",
+          "type": "run_risk_snapshot",
+          "title": "初始风险快照",
+          "detail": "启动观察",
+          "at": "2026-03-20T11:36:36.500Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_snapshot"
+        },
+        {
+          "id": "task_e1fb2f2f53:session_changed:1774162595293:074e2a",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "94a593c9-8a96-4cc5-82ff-8c77b47b553a",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "94a593c9-8a96-4cc5-82ff-8c77b47b553a"
+        },
+        {
+          "id": "task_e1fb2f2f53:session_changed:1774160374808:e4eba9",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37",
+          "at": "2026-03-22T06:19:34.808Z",
+          "sessionId": "0ebb3159-1d0e-4811-8b64-9cdc21a68a37"
+        },
+        {
+          "id": "task_e1fb2f2f53:status_reason_changed:1774006596502:e9a13b",
+          "type": "status_reason_changed",
+          "title": "状态原因已变化",
+          "detail": "智能体仍在启动，任务状态尚未稳定。",
+          "at": "2026-03-20T11:36:36.502Z"
+        },
+        {
+          "id": "task_e1fb2f2f53:status",
+          "type": "status_snapshot",
+          "title": "任务状态",
+          "detail": "preparing · 正在建立运行上下文，等待任务状态稳定。",
+          "at": "2026-03-20T10:21:00.297Z"
+        },
+        {
+          "id": "task_e1fb2f2f53:bootstrap",
+          "type": "risk",
+          "title": "启动观察",
+          "detail": "任务对应智能体仍在启动中，状态可能继续变化。",
+          "at": "2026-03-20T10:21:00.297Z"
+        }
+      ]
+    },
+    {
+      "id": "task_ec69f9e826",
+      "version": 1,
+      "title": "通用任务",
+      "type": "general",
+      "source": "derived_from_runtime",
+      "ownerAgentId": "learner",
+      "ownerSessionId": null,
+      "status": "preparing",
+      "waitingForUser": false,
+      "blocked": true,
+      "blockerType": null,
+      "blockerReason": "",
+      "statusReason": "智能体仍在启动，任务状态尚未稳定。",
+      "priority": "P1",
+      "stage": "初始化",
+      "summary": "正在建立运行上下文，等待任务状态稳定。",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-22T06:01:19.767Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "compatibility": {
+        "agentId": "learner",
+        "sessionsCount": 0
+      },
+      "events": [
+        {
+          "id": "task_ec69f9e826:run:run_learner:run_created:1774159279761:0d4bf2",
+          "type": "run_run_created",
+          "title": "运行单元已建立",
+          "detail": "启动中 · 刚进入运行过程，轨迹还在形成。",
+          "at": "2026-03-22T06:01:19.761Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "run_created"
+        },
+        {
+          "id": "task_ec69f9e826:run:run_learner:risk_snapshot:1774159279761:d3fe31",
+          "type": "run_risk_snapshot",
+          "title": "初始风险快照",
+          "detail": "启动观察",
+          "at": "2026-03-22T06:01:19.761Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_snapshot"
+        },
+        {
+          "id": "task_ec69f9e826:task_created:1774159279767:35faea",
+          "type": "task_created",
+          "title": "任务已建立",
+          "detail": "初始化 · 正在建立运行上下文，等待任务状态稳定。",
+          "at": "2026-03-22T06:01:19.767Z"
+        }
+      ]
+    },
+    {
+      "id": "task_060c756ece",
+      "version": 1,
+      "title": "方案拆解",
+      "type": "plan_breakdown",
+      "source": "derived_from_runtime",
+      "ownerAgentId": "planner",
+      "ownerSessionId": null,
+      "status": "preparing",
+      "waitingForUser": false,
+      "blocked": true,
+      "blockerType": null,
+      "blockerReason": "",
+      "statusReason": "智能体仍在启动，任务状态尚未稳定。",
+      "priority": "P1",
+      "stage": "初始化",
+      "summary": "正在建立运行上下文，等待任务状态稳定。",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-20T09:39:41.969Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "compatibility": {
+        "agentId": "planner",
+        "sessionsCount": 0
+      },
+      "events": [
+        {
+          "id": "task_060c756ece:run:run_planner:session:f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T10:28:18.862Z",
+          "sessionId": "f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session_changed:1774175044225:8fe668",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:model_changed:1774175044225:abbaa6",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session:12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T07:03:18.791Z",
+          "sessionId": "12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session_changed:1774162882474:d60752",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": "12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:model_changed:1774162882474:3417d6",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T07:01:22.474Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session:073666be-9db5-496c-9316-0fb5132ccbdc",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:58:01.905Z",
+          "sessionId": "073666be-9db5-496c-9316-0fb5132ccbdc",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session_changed:1774162595293:83cbda",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "073666be-9db5-496c-9316-0fb5132ccbdc",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "073666be-9db5-496c-9316-0fb5132ccbdc",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_060c756ece:session_changed:1774175044225:c59a86",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "f9fbf069-da00-4daa-9b6e-7aab0d040622",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "f9fbf069-da00-4daa-9b6e-7aab0d040622"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:model_changed:1774162595293:db23c0",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session:68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:23:57.901Z",
+          "sessionId": "68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session_changed:1774160374807:1d3e6f",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "at": "2026-03-22T06:19:34.807Z",
+          "sessionId": "68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_060c756ece:session_changed:1774162882475:c3a1bc",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "12cf785b-0b38-4294-b47c-455ed28e09ed",
+          "at": "2026-03-22T07:01:22.475Z",
+          "sessionId": "12cf785b-0b38-4294-b47c-455ed28e09ed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:model_changed:1774160374807:7aa474",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:19:34.807Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session:1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "type": "run_session_snapshot",
+          "title": "进入运行队列",
+          "detail": "gpt-5.4 · 0 资源 · 上下文待同步",
+          "at": "2026-03-22T06:02:06.712Z",
+          "sessionId": "1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:session_changed:1774159279761:6811ff",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "at": "2026-03-22T06:01:19.761Z",
+          "sessionId": "1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_060c756ece:session_changed:1774162595293:5f9b2d",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "073666be-9db5-496c-9316-0fb5132ccbdc",
+          "at": "2026-03-22T06:56:35.293Z",
+          "sessionId": "073666be-9db5-496c-9316-0fb5132ccbdc"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:model_changed:1774159279761:82a092",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → gpt-5.4",
+          "at": "2026-03-22T06:01:19.761Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:run_created:1774006596500:1f3a2a",
+          "type": "run_run_created",
+          "title": "运行单元已建立",
+          "detail": "启动中 · 刚进入运行过程，轨迹还在形成。",
+          "at": "2026-03-20T11:36:36.500Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "run_created"
+        },
+        {
+          "id": "task_060c756ece:run:run_planner:risk_snapshot:1774006596500:e2b074",
+          "type": "run_risk_snapshot",
+          "title": "初始风险快照",
+          "detail": "启动观察",
+          "at": "2026-03-20T11:36:36.500Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_snapshot"
+        },
+        {
+          "id": "task_060c756ece:session_changed:1774160374808:5364c8",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "68effd14-5247-401f-92a8-85cd57c9f3ae",
+          "at": "2026-03-22T06:19:34.808Z",
+          "sessionId": "68effd14-5247-401f-92a8-85cd57c9f3ae"
+        },
+        {
+          "id": "task_060c756ece:session_changed:1774159279767:4b543e",
+          "type": "session_changed",
+          "title": "任务负责会话已切换",
+          "detail": "1f914361-aec8-4807-b0f1-a94371cdb2e5",
+          "at": "2026-03-22T06:01:19.767Z",
+          "sessionId": "1f914361-aec8-4807-b0f1-a94371cdb2e5"
+        },
+        {
+          "id": "task_060c756ece:status_reason_changed:1774006596502:62d1c3",
+          "type": "status_reason_changed",
+          "title": "状态原因已变化",
+          "detail": "智能体仍在启动，任务状态尚未稳定。",
+          "at": "2026-03-20T11:36:36.502Z"
+        },
+        {
+          "id": "task_060c756ece:status",
+          "type": "status_snapshot",
+          "title": "任务状态",
+          "detail": "preparing · 正在建立运行上下文，等待任务状态稳定。",
+          "at": "2026-03-20T10:21:00.297Z"
+        }
+      ]
+    },
+    {
+      "id": "task_ddce332e1d",
+      "version": 1,
+      "title": "回归复核",
+      "type": "review",
+      "source": "derived_from_runtime",
+      "ownerAgentId": "reviewer",
+      "ownerSessionId": null,
+      "status": "paused",
+      "waitingForUser": false,
+      "blocked": true,
+      "blockerType": null,
+      "blockerReason": "",
+      "statusReason": "当前长时间没有新的任务动作，进入暂停观察。",
+      "priority": "P3",
+      "stage": "排队中",
+      "summary": "当前没有明显执行痕迹，更像处于待命或轻量跟进。",
+      "latestContextPercent": null,
+      "totalTokens": 0,
+      "sessionCount": 0,
+      "lastActiveAgeMs": null,
+      "lastSession": null,
+      "createdAt": "2026-03-20T11:36:36.502Z",
+      "updatedAt": "2026-03-23T04:42:17.946Z",
+      "compatibility": {
+        "agentId": "reviewer",
+        "sessionsCount": 0
+      },
+      "events": [
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:status_changed:1774175148332:d0bfc3",
+          "type": "run_status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-22T10:25:48.332Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "status_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:risk_changed:1774175148332:42c868",
+          "type": "run_risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 长时静默",
+          "at": "2026-03-22T10:25:48.332Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:status_changed:1774175133399:1c56f5",
+          "type": "run_status_changed",
+          "title": "运行状态已变化",
+          "detail": "轻载 / 待命 → 深度运行中",
+          "at": "2026-03-22T10:25:33.399Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "status_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:context_changed:1774175133399:ac3184",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 24%",
+          "at": "2026-03-22T10:25:33.399Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:session:c0842f47-9ff5-4940-b94a-bc8c19626287",
+          "type": "run_session_snapshot",
+          "title": "留下新的运行痕迹",
+          "detail": "claude-opus-4-6 · 47443 资源 · 上下文 24%",
+          "at": "2026-03-22T10:25:22.022Z",
+          "sessionId": "c0842f47-9ff5-4940-b94a-bc8c19626287",
+          "source": "run",
+          "runEventType": "session_snapshot"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:risk_changed:1774175044225:470462",
+          "type": "run_risk_changed",
+          "title": "风险标签已变化",
+          "detail": "长时静默 → 稳定运行",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:session_changed:1774175044225:127eb4",
+          "type": "run_session_changed",
+          "title": "最新会话已切换",
+          "detail": "c0842f47-9ff5-4940-b94a-bc8c19626287",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": "c0842f47-9ff5-4940-b94a-bc8c19626287",
+          "source": "run",
+          "runEventType": "session_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:model_changed:1774175044225:027fe6",
+          "type": "run_model_changed",
+          "title": "运行模型已变化",
+          "detail": "未记录 → claude-opus-4-6",
+          "at": "2026-03-22T10:24:04.225Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "model_changed"
+        },
+        {
+          "id": "task_ddce332e1d:status_changed:1774175148332:3069ef",
+          "type": "status_changed",
+          "title": "任务状态已变化",
+          "detail": "running → paused",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "task_ddce332e1d:priority_changed:1774175148332:e198d3",
+          "type": "priority_changed",
+          "title": "任务优先级已变化",
+          "detail": "P2 → P3",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "task_ddce332e1d:stage_changed:1774175148332:c97c7f",
+          "type": "stage_changed",
+          "title": "任务阶段已变化",
+          "detail": "深度处理 → 排队中",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "task_ddce332e1d:summary_changed:1774175148332:65377d",
+          "type": "summary_changed",
+          "title": "任务摘要已变化",
+          "detail": "当前没有明显执行痕迹，更像处于待命或轻量跟进。",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "task_ddce332e1d:status_reason_changed:1774175148332:4ef0d1",
+          "type": "status_reason_changed",
+          "title": "状态原因已变化",
+          "detail": "当前长时间没有新的任务动作，进入暂停观察。",
+          "at": "2026-03-22T10:25:48.332Z"
+        },
+        {
+          "id": "task_ddce332e1d:status_changed:1774175133399:dda758",
+          "type": "status_changed",
+          "title": "任务状态已变化",
+          "detail": "queued → running",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "task_ddce332e1d:priority_changed:1774175133399:927f8c",
+          "type": "priority_changed",
+          "title": "任务优先级已变化",
+          "detail": "P3 → P2",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "task_ddce332e1d:stage_changed:1774175133399:204a8d",
+          "type": "stage_changed",
+          "title": "任务阶段已变化",
+          "detail": "观察中 → 深度处理",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "task_ddce332e1d:summary_changed:1774175133399:c32e3e",
+          "type": "summary_changed",
+          "title": "任务摘要已变化",
+          "detail": "正在推进当前任务，并持续留下运行结果。",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "task_ddce332e1d:status_reason_changed:1774175133399:832ed3",
+          "type": "status_reason_changed",
+          "title": "状态原因已变化",
+          "detail": "当前已有连续执行痕迹，任务处于深度推进中。",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "task_ddce332e1d:context_changed:1774175133399:b64531",
+          "type": "context_changed",
+          "title": "任务上下文占用变化",
+          "detail": "—% → 24%",
+          "at": "2026-03-22T10:25:33.399Z"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:status_changed:1774163011551:9c4849",
+          "type": "run_status_changed",
+          "title": "运行状态已变化",
+          "detail": "深度运行中 → 轻载 / 待命",
+          "at": "2026-03-22T07:03:31.551Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "status_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:risk_changed:1774163011551:8b4339",
+          "type": "run_risk_changed",
+          "title": "风险标签已变化",
+          "detail": "稳定运行 → 长时静默",
+          "at": "2026-03-22T07:03:31.551Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "risk_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:status_changed:1774162996652:6fd6b1",
+          "type": "run_status_changed",
+          "title": "运行状态已变化",
+          "detail": "轻载 / 待命 → 深度运行中",
+          "at": "2026-03-22T07:03:16.653Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "status_changed"
+        },
+        {
+          "id": "task_ddce332e1d:run:run_reviewer:context_changed:1774162996653:c586c3",
+          "type": "run_context_changed",
+          "title": "上下文占用变化",
+          "detail": "—% → 31%",
+          "at": "2026-03-22T07:03:16.653Z",
+          "sessionId": null,
+          "source": "run",
+          "runEventType": "context_changed"
+        },
+        {
+          "id": "task_ddce332e1d:status_changed:1774175044225:65bfb1",
+          "type": "status_changed",
+          "title": "任务状态已变化",
+          "detail": "paused → queued",
+          "at": "2026-03-22T10:24:04.225Z"
+        }
+      ]
+    }
+  ]
+}

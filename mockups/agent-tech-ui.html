@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Platform - 科技风智能体页</title>
+  <style>
+    :root {
+      --bg: #06111f;
+      --bg-2: #09192d;
+      --panel: rgba(10, 22, 40, 0.78);
+      --panel-strong: rgba(12, 27, 48, 0.9);
+      --line: rgba(93, 168, 255, 0.16);
+      --line-strong: rgba(93, 168, 255, 0.34);
+      --text: #e7f2ff;
+      --muted: #89a5c6;
+      --cyan: #39d0ff;
+      --blue: #4c7dff;
+      --violet: #8b5cff;
+      --green: #37e6a7;
+      --amber: #ffb84d;
+      --red: #ff627d;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+      --glow: 0 0 0 1px rgba(57, 208, 255, 0.12), 0 0 32px rgba(76, 125, 255, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(57, 208, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(139, 92, 255, 0.16), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(76, 125, 255, 0.1), transparent 28%),
+        linear-gradient(180deg, #050d18 0%, #071221 36%, #07101c 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(77, 131, 188, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 131, 188, 0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,.45), transparent 85%);
+      pointer-events: none;
+    }
+
+    .shell {
+      width: min(1480px, calc(100vw - 48px));
+      margin: 28px auto;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .sidebar, .main-card, .topbar, .stat-card, .agent-card, .detail-card {
+      background: linear-gradient(180deg, rgba(10, 22, 40, 0.86), rgba(7, 16, 30, 0.9));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar::before, .main-card::before, .topbar::before, .stat-card::before, .agent-card::before, .detail-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255,255,255,0.03);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    .sidebar {
+      border-radius: 24px;
+      padding: 18px;
+      min-height: calc(100vh - 56px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 10px 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(93, 168, 255, 0.1);
+    }
+
+    .logo {
+      width: 42px; height: 42px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: radial-gradient(circle at 35% 35%, rgba(57,208,255,.5), rgba(76,125,255,.14));
+      box-shadow: 0 0 24px rgba(57, 208, 255, 0.25);
+      font-size: 20px;
+    }
+
+    .brand small, .sidebar h4, .nav-item span, .muted, .mini-label, .meta, .tiny {
+      color: var(--muted);
+    }
+
+    .brand strong { display: block; font-size: 16px; letter-spacing: .01em; }
+    .brand small { display: block; margin-top: 4px; font-size: 12px; }
+
+    .sidebar h4 {
+      margin: 22px 10px 10px;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 14px;
+      border-radius: 14px;
+      color: var(--text);
+      margin-bottom: 8px;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(57,208,255,.12), rgba(76,125,255,.1));
+      border-color: rgba(57,208,255,.18);
+      box-shadow: var(--glow);
+    }
+
+    .nav-item b { font-size: 14px; }
+    .nav-item span { font-size: 12px; }
+
+    .agent-mini {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(93,168,255,.12);
+      background: linear-gradient(180deg, rgba(12, 28, 48, .76), rgba(8, 18, 33, .88));
+    }
+
+    .agent-mini + .agent-mini { margin-top: 10px; }
+    .agent-mini-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .agent-mini-name { display: flex; gap: 10px; align-items: center; }
+    .agent-mini-avatar {
+      width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center;
+      background: rgba(57,208,255,.12); color: var(--cyan);
+    }
+
+    .pill {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 24px; padding: 0 9px; border-radius: 999px;
+      font-size: 11px; font-weight: 700;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .pill.active { background: rgba(55,230,167,.12); color: var(--green); border-color: rgba(55,230,167,.18); }
+    .pill.warm { background: rgba(57,208,255,.12); color: var(--cyan); border-color: rgba(57,208,255,.18); }
+    .pill.idle { background: rgba(255,184,77,.12); color: var(--amber); border-color: rgba(255,184,77,.18); }
+    .pill.warn { background: rgba(255,98,125,.12); color: var(--red); border-color: rgba(255,98,125,.18); }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .topbar {
+      border-radius: 24px;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+    .title p { margin: 8px 0 0; color: var(--muted); }
+
+    .toolbar {
+      display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;
+    }
+
+    .tool {
+      min-height: 38px; padding: 0 14px; border-radius: 12px;
+      border: 1px solid rgba(93,168,255,.14);
+      background: rgba(8, 20, 36, .82);
+      color: var(--text);
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+      font-size: 13px;
+    }
+
+    .tool.primary {
+      background: linear-gradient(90deg, rgba(57,208,255,.18), rgba(76,125,255,.18));
+      border-color: rgba(57,208,255,.28);
+      box-shadow: 0 0 20px rgba(57,208,255,.12);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      border-radius: 22px;
+      padding: 18px;
+      min-height: 122px;
+    }
+
+    .stat-card .mini-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 36px;
+      line-height: 1;
+      letter-spacing: -.04em;
+      margin-bottom: 8px;
+    }
+
+    .stat-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .board {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) 360px;
+      gap: 18px;
+    }
+
+    .main-card {
+      border-radius: 26px;
+      padding: 20px;
+    }
+
+    .section-head {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .section-head h2, .section-head h3 { margin: 0 0 6px; letter-spacing: -.03em; }
+    .section-head p { margin: 0; color: var(--muted); }
+
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab {
+      min-height: 30px; padding: 0 12px; border-radius: 999px; font-size: 12px;
+      display: inline-flex; align-items: center; border: 1px solid rgba(93,168,255,.14);
+      background: rgba(8, 20, 36, .78); color: var(--muted);
+    }
+    .tab.active { color: var(--cyan); border-color: rgba(57,208,255,.22); background: rgba(57,208,255,.08); }
+
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .agent-card {
+      border-radius: 24px;
+      padding: 18px;
+      min-height: 250px;
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .agent-card.hero {
+      background: linear-gradient(180deg, rgba(10, 28, 48, 0.95), rgba(7, 19, 34, 0.98));
+      border-color: rgba(57,208,255,.22);
+      box-shadow: var(--shadow), 0 0 42px rgba(76,125,255,.12);
+    }
+
+    .agent-top {
+      display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 16px;
+    }
+
+    .agent-identity {
+      display: flex; gap: 12px; align-items: center;
+    }
+
+    .avatar {
+      width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; font-size: 22px;
+      background: linear-gradient(180deg, rgba(57,208,255,.16), rgba(76,125,255,.08));
+      border: 1px solid rgba(57,208,255,.14);
+      box-shadow: 0 0 18px rgba(57,208,255,.12);
+    }
+
+    .agent-identity strong { display: block; font-size: 18px; margin-bottom: 4px; }
+    .agent-identity span { color: var(--muted); font-size: 13px; }
+
+    .glow-line {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(57,208,255,.3), transparent 70%);
+      margin: 16px 0;
+    }
+
+    .task {
+      margin-bottom: 12px;
+    }
+
+    .task strong {
+      display: block; font-size: 15px; margin-bottom: 8px;
+    }
+
+    .task p, .summary p { margin: 0; color: #b1c6df; line-height: 1.6; font-size: 13px; }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .metric-box {
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(8, 20, 36, .85);
+      border: 1px solid rgba(93,168,255,.12);
+    }
+
+    .metric-box span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+    .metric-box strong { display: block; font-size: 18px; letter-spacing: -.03em; }
+
+    .card-foot {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px;
+    }
+
+    .risk {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: 12px; font-size: 12px;
+      border: 1px solid rgba(255,184,77,.16); background: rgba(255,184,77,.08); color: var(--amber);
+    }
+
+    .action {
+      min-height: 34px; padding: 0 12px; border-radius: 12px;
+      border: 1px solid rgba(57,208,255,.16); background: rgba(57,208,255,.08); color: var(--cyan);
+      display: inline-flex; align-items: center;
+      font-size: 13px;
+    }
+
+    .detail-card {
+      border-radius: 26px;
+      padding: 18px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .detail-block {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(8, 20, 36, .82);
+      border: 1px solid rgba(93,168,255,.12);
+    }
+
+    .detail-block h4 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      letter-spacing: .01em;
+    }
+
+    .list, .timeline {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .line {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 72px 10px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .timeline-item .dot {
+      width: 10px; height: 10px; border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(57,208,255,.35);
+      margin-top: 5px;
+    }
+
+    .tiny { font-size: 12px; }
+
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 30px; padding: 0 12px; border-radius: 999px;
+      border: 1px solid rgba(57,208,255,.14); background: rgba(57,208,255,.08); color: var(--cyan);
+      font-size: 12px; font-weight: 700;
+    }
+
+    @media (max-width: 1200px) {
+      .shell, .board { grid-template-columns: 1fr; }
+      .sidebar { min-height: auto; }
+      .stats, .agent-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100vw - 24px, 1480px); margin: 12px auto; }
+      .topbar, .section-head, .agent-top, .card-foot, .line { flex-direction: column; align-items: flex-start; }
+      .stats, .agent-grid, .metric-row { grid-template-columns: 1fr; }
+      .toolbar { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">✦</div>
+        <div>
+          <strong>Agent Vision</strong>
+          <small>智能体可视化平台 / Futuristic UI</small>
+        </div>
+      </div>
+
+      <h4>Platform</h4>
+      <div class="nav-item active"><b>总览</b><span>Overview</span></div>
+      <div class="nav-item"><b>智能体</b><span>Agents</span></div>
+      <div class="nav-item"><b>任务</b><span>Tasks</span></div>
+      <div class="nav-item"><b>运行</b><span>Runtime</span></div>
+      <div class="nav-item"><b>协作</b><span>Collaboration</span></div>
+      <div class="nav-item"><b>系统</b><span>System</span></div>
+
+      <h4>Hot Agents</h4>
+      <div class="agent-mini">
+        <div class="agent-mini-top">
+          <div class="agent-mini-name">
+            <div class="agent-mini-avatar">🐉</div>
+            <div><strong>龙龙</strong><div class="tiny muted">主控 Agent</div></div>
+          </div>
+          <div class="pill active">活跃</div>
+        </div>
+        <div class="tiny muted">当前任务：汇总用户请求，推进 Agent Dashboard 方向调整</div>
+      </div>
+      <div class="agent-mini">
+        <div class="agent-mini-top">
+          <div class="agent-mini-name">
+            <div class="agent-mini-avatar">🔧</div>
+            <div><strong>执行者</strong><div class="tiny muted">开发 / 落地</div></div>
+          </div>
+          <div class="pill warm">在线</div>
+        </div>
+        <div class="tiny muted">当前任务：前端结构改造与科技风视觉提案</div>
+      </div>
+      <div class="agent-mini">
+        <div class="agent-mini-top">
+          <div class="agent-mini-name">
+            <div class="agent-mini-avatar">🔍</div>
+            <div><strong>质检员</strong><div class="tiny muted">检查 / 复核</div></div>
+          </div>
+          <div class="pill idle">空闲</div>
+        </div>
+        <div class="tiny muted">当前任务：检查视觉与交互方向是否偏重</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="title">
+          <div class="header-badge">AGENTS / VISUALIZATION</div>
+          <h1>智能体页面 · 科技风视觉草图</h1>
+          <p>重点不是协作后台，而是让每个智能体变得可观察、可理解、可比较。</p>
+        </div>
+        <div class="toolbar">
+          <div class="tool">⌕ 搜索智能体</div>
+          <div class="tool">状态：全部</div>
+          <div class="tool">排序：最近活跃</div>
+          <div class="tool primary">+ 新建视图</div>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card">
+          <div class="mini-label">TOTAL AGENTS</div>
+          <strong>08</strong>
+          <p>当前可见智能体总数，已接入统一运行视图</p>
+        </div>
+        <div class="stat-card">
+          <div class="mini-label">ACTIVE NOW</div>
+          <strong>03</strong>
+          <p>最近 5 分钟内持续活跃的智能体</p>
+        </div>
+        <div class="stat-card">
+          <div class="mini-label">RISK SIGNALS</div>
+          <strong>02</strong>
+          <p>上下文占用偏高 / 启动中等风险信号</p>
+        </div>
+        <div class="stat-card">
+          <div class="mini-label">OUTPUTS TODAY</div>
+          <strong>27</strong>
+          <p>今日累计生成的结果与关键动作摘要</p>
+        </div>
+      </section>
+
+      <section class="board">
+        <section class="main-card">
+          <div class="section-head">
+            <div>
+              <h2>Agent Grid</h2>
+              <p>以卡片方式展示各智能体的身份、当前任务、资源情况和风险状态。</p>
+            </div>
+            <div class="tabs">
+              <div class="tab active">全部</div>
+              <div class="tab">活跃</div>
+              <div class="tab">高占用</div>
+              <div class="tab">主控</div>
+            </div>
+          </div>
+
+          <div class="agent-grid">
+            <article class="agent-card hero">
+              <div class="agent-top">
+                <div class="agent-identity">
+                  <div class="avatar">🐉</div>
+                  <div>
+                    <strong>龙龙</strong>
+                    <span>主控 Agent / User-facing brain</span>
+                  </div>
+                </div>
+                <div class="pill active">持续活跃</div>
+              </div>
+              <div class="task">
+                <strong>当前任务</strong>
+                <p>正在重定义平台方向：从“多智能体协作平台”收束为“智能体可视化平台”。</p>
+              </div>
+              <div class="summary">
+                <p>最近行为：2 分钟前完成 UI 方向重构方案输出，当前等待下一轮决策。</p>
+              </div>
+              <div class="glow-line"></div>
+              <div class="metric-row">
+                <div class="metric-box"><span>模型</span><strong>Opus 4.6</strong></div>
+                <div class="metric-box"><span>Token</span><strong>18.4k</strong></div>
+                <div class="metric-box"><span>上下文</span><strong>68%</strong></div>
+              </div>
+              <div class="card-foot">
+                <div class="risk">⚠ 焦点 Agent · 当前最值得关注</div>
+                <div class="action">查看详情 →</div>
+              </div>
+            </article>
+
+            <article class="agent-card">
+              <div class="agent-top">
+                <div class="agent-identity">
+                  <div class="avatar">🔧</div>
+                  <div>
+                    <strong>执行者</strong>
+                    <span>Builder / UI & Landing</span>
+                  </div>
+                </div>
+                <div class="pill warm">在线</div>
+              </div>
+              <div class="task">
+                <strong>当前任务</strong>
+                <p>负责将方向方案落成页面结构与科技风视觉示意。</p>
+              </div>
+              <div class="summary">
+                <p>最近行为：8 分钟前完成风险条与动态筛选，等待新的页面设计任务。</p>
+              </div>
+              <div class="glow-line"></div>
+              <div class="metric-row">
+                <div class="metric-box"><span>模型</span><strong>Opus 4.6</strong></div>
+                <div class="metric-box"><span>Token</span><strong>10.2k</strong></div>
+                <div class="metric-box"><span>上下文</span><strong>49%</strong></div>
+              </div>
+              <div class="card-foot">
+                <div class="risk">◎ 状态稳定</div>
+                <div class="action">查看详情 →</div>
+              </div>
+            </article>
+
+            <article class="agent-card">
+              <div class="agent-top">
+                <div class="agent-identity">
+                  <div class="avatar">📋</div>
+                  <div>
+                    <strong>规划师</strong>
+                    <span>Planner / Strategy & IA</span>
+                  </div>
+                </div>
+                <div class="pill idle">空闲</div>
+              </div>
+              <div class="task">
+                <strong>当前任务</strong>
+                <p>待命中，可随时接手信息架构拆分与新页面结构方案。</p>
+              </div>
+              <div class="summary">
+                <p>最近行为：1 小时前完成模块优先级建议，目前暂无新输入。</p>
+              </div>
+              <div class="glow-line"></div>
+              <div class="metric-row">
+                <div class="metric-box"><span>模型</span><strong>Opus 4.6</strong></div>
+                <div class="metric-box"><span>Token</span><strong>2.8k</strong></div>
+                <div class="metric-box"><span>上下文</span><strong>18%</strong></div>
+              </div>
+              <div class="card-foot">
+                <div class="risk">△ 长时间无活动</div>
+                <div class="action">查看详情 →</div>
+              </div>
+            </article>
+
+            <article class="agent-card">
+              <div class="agent-top">
+                <div class="agent-identity">
+                  <div class="avatar">🔍</div>
+                  <div>
+                    <strong>质检员</strong>
+                    <span>QA / Review & Safety</span>
+                  </div>
+                </div>
+                <div class="pill warm">在线</div>
+              </div>
+              <div class="task">
+                <strong>当前任务</strong>
+                <p>复查新功能是否让页面变重，检查交互层级与视觉风险。</p>
+              </div>
+              <div class="summary">
+                <p>最近行为：刚完成一轮检查清单输出，当前等待进一步回归任务。</p>
+              </div>
+              <div class="glow-line"></div>
+              <div class="metric-row">
+                <div class="metric-box"><span>模型</span><strong>Opus 4.6</strong></div>
+                <div class="metric-box"><span>Token</span><strong>3.4k</strong></div>
+                <div class="metric-box"><span>上下文</span><strong>27%</strong></div>
+              </div>
+              <div class="card-foot">
+                <div class="risk">✓ 低风险</div>
+                <div class="action">查看详情 →</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <aside class="detail-card">
+          <div class="section-head">
+            <div>
+              <h3>Agent Detail</h3>
+              <p>选中智能体后的右侧详情抽屉示意。</p>
+            </div>
+            <div class="pill active">龙龙</div>
+          </div>
+
+          <section class="detail-block">
+            <h4>基础信息</h4>
+            <div class="list">
+              <div class="line"><span class="muted">角色</span><strong>主控 Agent</strong></div>
+              <div class="line"><span class="muted">当前模型</span><strong>claude-opus-4-6</strong></div>
+              <div class="line"><span class="muted">最近活跃</span><strong>2 分钟前</strong></div>
+              <div class="line"><span class="muted">当前状态</span><strong style="color:#37e6a7">持续活跃</strong></div>
+            </div>
+          </section>
+
+          <section class="detail-block">
+            <h4>当前任务</h4>
+            <div class="list">
+              <div class="line"><span class="muted">任务标题</span><strong>平台方向重构</strong></div>
+              <div class="line"><span class="muted">当前阶段</span><strong>方案输出中</strong></div>
+              <div class="line"><span class="muted">最近更新</span><strong>刚刚</strong></div>
+            </div>
+          </section>
+
+          <section class="detail-block">
+            <h4>最近行为时间线</h4>
+            <div class="timeline">
+              <div class="timeline-item"><div class="tiny muted">刚刚</div><div class="dot"></div><div>输出“智能体页”科技风 UI 草图</div></div>
+              <div class="timeline-item"><div class="tiny muted">2 分钟前</div><div class="dot"></div><div>重构平台方向：智能体可视化优先</div></div>
+              <div class="timeline-item"><div class="tiny muted">8 分钟前</div><div class="dot"></div><div>完成风险提示条与动态筛选设计</div></div>
+            </div>
+          </section>
+
+          <section class="detail-block">
+            <h4>运行数据</h4>
+            <div class="list">
+              <div class="line"><span class="muted">会话数</span><strong>3</strong></div>
+              <div class="line"><span class="muted">Token</span><strong>18.4k</strong></div>
+              <div class="line"><span class="muted">上下文占用</span><strong style="color:#ffb84d">68%</strong></div>
+              <div class="line"><span class="muted">风险</span><strong>需持续关注占用变化</strong></div>
+            </div>
+          </section>
+        </aside>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
