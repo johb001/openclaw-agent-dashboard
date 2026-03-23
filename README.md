@@ -152,6 +152,9 @@ npm run restart:latest
 - API（走前端代理）：`http://<server-ip>:4173/api/health`
 - API（直连后端）：`http://127.0.0.1:3456/api/health`
 
+当前项目预览地址：
+- `http://100.101.231.43:4173/`
+
 ---
 
 ## 快速开始
